@@ -1,37 +1,26 @@
 package blaser.berisha;
 
+import java.util.ArrayList;
+
+/*
+ * Authors: Milena Blaser, Blerinë Berisha
+ * Project: Flashcards
+*/
+/**
+ * Class to administer all sets. Here you can show, create and delete sets.
+ */
 public class QuizManager {
-    private String name;
-    private String number;
-    private String email;
+    private ArrayList<Set> sets;
 
-    public QuizManager(String name, String number, String email) {
-        this.name = name;
-        this.number = number;
-        this.email = email;
+    public QuizManager(ArrayList<Set> sets) {
+        this.sets = sets;
     }
 
-    public String getName() {
-        return name;
+    public ArrayList<Set> getSets() {
+        return sets;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSets(ArrayList<Set> sets) {
+        this.sets = sets;
     }
 }

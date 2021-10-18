@@ -2,6 +2,14 @@ package blaser.berisha;
 
 import java.util.ArrayList;
 
+/*
+ * Authors: Milena Blaser, Blerinë Berisha
+ * Project: Flashcards
+ */
+
+/**
+ * Class where Flashcards are saved. Here you can also add, delete and update Flashcards in a set.
+ */
 public class Set {
     private ArrayList<Flashcard> set;
     private String title;
@@ -13,6 +21,10 @@ public class Set {
         this.title = title;
         this.zipCode = zipCode;
         this.country = country;
+    }
+
+    public Set addFlashcard(){
+
     }
 
     public ArrayList<Flashcard> getSet() {
