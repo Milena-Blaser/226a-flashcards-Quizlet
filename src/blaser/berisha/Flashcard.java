@@ -1,5 +1,10 @@
 package blaser.berisha;
 
+/**
+ * Authors: Milena Blaser, Blerinë Berisha
+ * Project: Flashcards
+ */
+
 public class Flashcard {
     private String word;
     private String definition;

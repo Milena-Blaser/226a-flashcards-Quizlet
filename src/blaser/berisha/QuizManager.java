@@ -1,5 +1,10 @@
 package blaser.berisha;
 
+/**
+ * Authors: Milena Blaser, Blerinë Berisha
+ * Project: Flashcards
+ */
+
 public class QuizManager {
     private String name;
     private String number;
@@ -34,4 +39,5 @@ public class QuizManager {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

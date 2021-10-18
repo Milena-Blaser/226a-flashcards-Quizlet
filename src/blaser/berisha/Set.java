@@ -2,6 +2,11 @@ package blaser.berisha;
 
 import java.util.ArrayList;
 
+/**
+ * Authors: Milena Blaser, Blerinë Berisha
+ * Project: Flashcards
+ */
+
 public class Set {
     private ArrayList<Flashcard> set;
     private String title;
