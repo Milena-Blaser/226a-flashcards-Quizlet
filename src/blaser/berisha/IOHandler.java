@@ -5,10 +5,10 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
-public class Main {
 
-    public static void main(String[] args) {
+/**
+ * Class to print menu and handle user input.
+ */
+public class IOHandler {
 
-
-    }
 }

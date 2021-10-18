@@ -1,19 +1,25 @@
 package blaser.berisha;
-
-/**
+/*
  * Authors: Milena Blaser, Blerinë Berisha
  * Project: Flashcards
  */
 
+/**
+ * Class with attributes, constructor, getters and setters for Flashcards.
+ * Here are no specific methods needed, since the flashcards will be handled in their sets.
+ */
 public class Flashcard {
     private String word;
     private String definition;
-    private int correct;
+    private boolean isCorrect;
 
-    public Flashcard(String word, String definition, int correct) {
+    public Flashcard(String word, String definition) {
         this.word = word;
         this.definition = definition;
-        this.correct = correct;
+    }
+
+    public Flashcard(){
+
     }
 
     public String getWord() {
@@ -32,11 +38,11 @@ public class Flashcard {
         this.definition = definition;
     }
 
-    public int getCorrect() {
-        return correct;
+    public boolean isCorrect() {
+        return isCorrect;
     }
 
-    public void setCorrect(int correct) {
-        this.correct = correct;
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
     }
 }
