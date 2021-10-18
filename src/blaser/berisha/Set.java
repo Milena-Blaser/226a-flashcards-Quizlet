@@ -1,6 +1,7 @@
 package blaser.berisha;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
  * Authors: Milena Blaser, Blerinë Berisha
@@ -13,18 +14,40 @@ import java.util.ArrayList;
 public class Set {
     private ArrayList<Flashcard> set;
     private String title;
-    private String zipCode;
-    private String country;
-
-    public Set(ArrayList<Flashcard> set, String title, String zipCode, String country) {
+    private Scanner scan = new Scanner(System.in);
+    public Set(ArrayList<Flashcard> set, String title) {
         this.set = set;
         this.title = title;
-        this.zipCode = zipCode;
-        this.country = country;
     }
 
-    public Set addFlashcard(){
+    /**
+     * @return returns the ArrayList set with the added flashcard.
+     */
+    public ArrayList<Flashcard> addFlashcard(){
+        System.out.println("Enter a word: ");
+        String word = scan.nextLine();
+        System.out.println("Enter the definition: ");
+        String definition = scan.nextLine();
+        Flashcard newCard = new Flashcard(word, definition);
+        set.add(newCard);
+        System.out.println("Card added!");
+        return set;
+    }
 
+    /**
+     * @return returns an Arraylist with all results.
+     */
+    public ArrayList<Flashcard> searchByWord(){
+        ArrayList<Flashcard> result = new ArrayList<Flashcard>();
+        System.out.println("What would you like to search for?");
+        String search = scan.nextLine();
+        for(int i=0; i < set.size(); i++){
+            if(set.get(i).getWord().toLowerCase().contains(search.toLowerCase())){
+                result.add(set.get(i));
+                System.out.println("Word: "+set.get(i).getWord()+"\nDefinition: "+set.get(i).getDefinition());
+            }
+        }
+        return result;
     }
 
     public ArrayList<Flashcard> getSet() {
@@ -43,19 +66,4 @@ public class Set {
         this.title = title;
     }
 
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }
