@@ -1,5 +1,6 @@
 package blaser.berisha;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +41,7 @@ public class Set {
      */
     public ArrayList<Flashcard> searchByWord() {
         ArrayList<Flashcard> result = new ArrayList<Flashcard>();
-        System.out.println("What would you like to search for?");
+        System.out.println("Which word would you like to search for?");
         String search = scan.nextLine();
         for (int i = 0; i < set.size(); i++) {
             if (set.get(i).getWord().toLowerCase().contains(search.toLowerCase())) {
@@ -68,6 +69,40 @@ public class Set {
             }
         }
         return result;
+    }
+
+    public ArrayList<Flashcard> updateFlashcard() {
+        searchByWord();
+        System.out.println("Enter the index of the word you'd like to edit: ");
+        int edit = scan.nextInt();
+        for (int i = 0; i < set.size(); i++) {
+            if (edit == i) {
+                System.out.println("Would you like to change the word, the definition or both? w/d/b");
+                String editWord = " ";
+                String editDef = " ";
+                switch (editWord.toLowerCase().charAt(0)) {
+                    case 'w':
+                        System.out.println("Enter the new word: ");
+                        set.get(i).setWord(scan.nextLine());
+                        System.out.println("Card edited!\nNew word: " + set.get(i).getWord() + "\nNew Definition: " + set.get(i).getDefinition());
+                        break;
+                    case 'd':
+                        System.out.println("Enter the new definition: ");
+                        set.get(i).setDefinition(scan.nextLine());
+                        System.out.println("Card edited!\nNew word: " + set.get(i).getWord() + "\nNew Definition: " + set.get(i).getDefinition());
+                        break;
+
+                    case 'b':
+                        System.out.println("Enter the new word: ");
+                        set.get(i).setDefinition(scan.nextLine());
+                        System.out.println("Enter the new definition: ");
+                        set.get(i).setDefinition(scan.nextLine());
+                        System.out.println("Card edited!\nNew word: " + set.get(i).getWord() + "\nNew Definition: " + set.get(i).getDefinition());
+                        break;
+                }
+            }
+        }
+        return set;
     }
 
 
