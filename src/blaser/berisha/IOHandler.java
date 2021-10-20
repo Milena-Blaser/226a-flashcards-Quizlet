@@ -7,6 +7,8 @@ package blaser.berisha;
 
 import com.sun.source.tree.WhileLoopTree;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -44,7 +46,7 @@ public class IOHandler {
 
     public static void chooseColor() {
         printColors();
-        System.out.println(getColor() + "Enter the letters in braces to choose: ");
+        System.out.println(getColor() + "Enter the letters in braces to choose: " + RESET);
         String chosen = scan.nextLine();
         switch (chosen.toLowerCase()) {
             case "b" -> setColor(BLUE);
@@ -55,7 +57,6 @@ public class IOHandler {
             case "boc" -> setColor(CYAN_BACKGROUND + BLACK);
             case "g" -> setColor(GRAY);
             case "bog" -> setColor(GRAY_BACKGROUND + BLACK);
-            case "w" -> setColor(RESET);
             default -> setColor(RESET);
         }
     }
@@ -68,16 +69,17 @@ public class IOHandler {
         System.out.println(getColor() + "║ 1. show all sets                  ║" + RESET);
         System.out.println(getColor() + "║ 2. create new set                 ║" + RESET);
         System.out.println(getColor() + "║ 3. delete set                     ║" + RESET);
-        System.out.println(getColor() + "║ 4. choose set                     ║" + RESET);
-        System.out.println(getColor() + "║ 5. change color                   ║" + RESET);
-        System.out.println(getColor() + "║ 6. end program                    ║" + RESET);
+        System.out.println(getColor() + "║ 4. change set title               ║" + RESET);
+        System.out.println(getColor() + "║ 5. choose set                     ║" + RESET);
+        System.out.println(getColor() + "║ 6. change color                   ║" + RESET);
+        System.out.println(getColor() + "║ 7. end program                    ║" + RESET);
         System.out.println(getColor() + "╚═══════════════════════════════════╝" + RESET);
     }
 
 
     public static void printSetMenu() {
         System.out.println(getColor() + "╔═══════════════════════════════════╗" + RESET);
-        System.out.println(getColor() + "\u001B[1m║ Enter the number in braces to..   ║\u001B[0m" + RESET);
+        System.out.println(getColor() + "\u001B[1m║ Enter the number to..             ║\u001B[0m" + RESET);
         System.out.println(getColor() + "║───────────────────────────────────║" + RESET);
         System.out.println(getColor() + "║ 1. show all flashcards            ║" + RESET);
         System.out.println(getColor() + "║ 2. create new flashcard           ║" + RESET);
@@ -124,6 +126,22 @@ public class IOHandler {
         ;
         for (int i = 0; i < set.getSet().size(); i++) {
             String toPad = (String.format("%-20s", set.getSet().get(i).getWord()) + "---->" + String.format("%40s", set.getSet().get(i).getDefinition()));
+            String padded = String.format("%-45s", toPad);
+            System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
+
+        }
+        System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
+    }
+
+    public static void printCards(ArrayList<Flashcard> cards) {
+        System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(getColor() + "\u001B[1m║ CARDS                                                                   ║\u001B[0m" + RESET);
+        System.out.println(getColor() + "║─────────────────────────────────────────────────────────────────────────║" + RESET);
+        System.out.println(getColor() + "║ Nr.  Word                                                    Definition ║" + RESET);
+        System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET)
+        ;
+        for (int i = 0; i < cards.size(); i++) {
+            String toPad = (String.format("%-20s", cards.get(i).getWord()) + "---->" + String.format("%40s", cards.get(i).getDefinition()));
             String padded = String.format("%-45s", toPad);
             System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
 

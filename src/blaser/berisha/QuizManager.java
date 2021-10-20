@@ -13,13 +13,13 @@ import java.util.Scanner;
  */
 public class QuizManager {
     private ArrayList<Set> sets;
-    private Scanner scan = new Scanner(System.in);
 
     public QuizManager(ArrayList<Set> sets) {
         this.sets = sets;
     }
 
     public ArrayList<Set> addSet() {
+        Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter the title of the set: " + IOHandler.RESET);
         String setTitle = scan.nextLine();
         ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
@@ -29,8 +29,24 @@ public class QuizManager {
         return sets;
     }
 
+    public ArrayList<Set> changeSetTitle(){
+        Scanner scan = new Scanner(System.in);
+        searchByWord();
+        System.out.println(IOHandler.getColor() + "Enter the index of the title you'd like to change: " + IOHandler.RESET);
+        int edit = scan.nextInt();
+        for (int i = 0; i < sets.size(); i++) {
+            if (edit == i) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Enter the new title: ");
+                sets.get(i).setTitle(scanner.nextLine());
+                System.out.println("Title changed!");
+            }
+        }
+        return sets;
+    }
+
     public ArrayList<Set> deleteSet() {
-        ArrayList<Set> result = new ArrayList<Set>();
+        Scanner scan = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the set you'd like to delete: " + IOHandler.RESET);
         int delete = scan.nextInt();
@@ -43,6 +59,7 @@ public class QuizManager {
     }
 
     public ArrayList<Set> searchByWord() {
+        Scanner scan = new Scanner(System.in);
         ArrayList<Set> result = new ArrayList<Set>();
         System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
         String search = scan.nextLine();
@@ -59,6 +76,7 @@ public class QuizManager {
     }
 
     public Set chooseSet() {
+        Scanner scan = new Scanner(System.in);
         searchByWord();
         Set result = new Set(new ArrayList<Flashcard>(), " ");
         System.out.println(IOHandler.getColor() + "Enter the index of the set you'd like to practice: " + IOHandler.RESET);
@@ -77,10 +95,11 @@ public class QuizManager {
     }
 
     public void chooseAction() {
+        Scanner scanner = new Scanner(System.in);
         Set result = chooseSet();
         IOHandler.printSetMenu();
-        int choice = scan.nextInt();
-        while (choice != 4) {
+        int choice = scanner.nextInt();
+        while (choice != 5) {
             switch (choice) {
                 case 1:
                     IOHandler.printFlashcards(result);
@@ -106,7 +125,7 @@ public class QuizManager {
                     System.exit(0);
             }
             IOHandler.printSetMenu();
-            choice = scan.nextInt();
+            choice = scanner.nextInt();
         }
     }
 

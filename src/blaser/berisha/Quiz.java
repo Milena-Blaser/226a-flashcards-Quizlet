@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Quiz {
     private QuizManager manager;
-    private Scanner scan = new Scanner(System.in);
+
 
     public Quiz(QuizManager manager) {
         this.manager = manager;
@@ -28,10 +28,11 @@ public class Quiz {
     }
 
     public void startQuiz() {
+        Scanner scan = new Scanner(System.in);
         IOHandler.chooseColor();
         IOHandler.printStartMenu();
         int choice = scan.nextInt();
-        while (choice != 6) {
+        while (choice != 7) {
             switch (choice) {
                 case 1:
                     IOHandler.printSets(getManager());
@@ -42,11 +43,16 @@ public class Quiz {
                 case 3:
                     manager.deleteSet();
                     break;
-                case 4:
-                    manager.chooseAction();
+                case 4: manager.changeSetTitle();
                     break;
                 case 5:
+                    manager.chooseAction();
+                    break;
+                case 6:
                     IOHandler.chooseColor();
+                    break;
+                case 7:
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid input. Try again.");

@@ -1,6 +1,5 @@
 package blaser.berisha;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +14,6 @@ import java.util.Scanner;
 public class Set {
     private ArrayList<Flashcard> set;
     private String title;
-    private Scanner scan = new Scanner(System.in);
 
     public Set(ArrayList<Flashcard> set, String title) {
         this.set = set;
@@ -26,31 +24,36 @@ public class Set {
      * @return returns the ArrayList set with the added flashcard.
      */
     public ArrayList<Flashcard> addFlashcard() {
-        System.out.println(IOHandler.getColor() +"Enter a word: " +IOHandler.RESET);
-        String word = scan.nextLine();
-        System.out.println(IOHandler.getColor() +"Enter the definition: " +IOHandler.RESET);
-        String definition = scan.nextLine();
+        Scanner input = new Scanner(System.in);
+        System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
+        String word = input.nextLine();
+        System.out.println(IOHandler.getColor() + "Enter the definition: " + IOHandler.RESET);
+        String definition = input.nextLine();
         Flashcard newCard = new Flashcard(word, definition);
         set.add(newCard);
-        System.out.println(IOHandler.getColor() +"Card added!" +IOHandler.RESET);
+        System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
         return set;
     }
 
     /**
      * @return returns an Arraylist with all results.
      */
-    public ArrayList<Flashcard> searchSet() {
+    public ArrayList<Flashcard> searchByWord() {
+        Scanner input = new Scanner(System.in);
         ArrayList<Flashcard> result = new ArrayList<Flashcard>();
-        System.out.println(IOHandler.getColor() +"Which word would you like to search for?" +IOHandler.RESET);
-        String search = scan.nextLine();
+        Set res = new Set(result, "results");
+        System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
+        String search = input.nextLine();
         for (int i = 0; i < set.size(); i++) {
             if (set.get(i).getWord().toLowerCase().contains(search.toLowerCase())) {
                 result.add(set.get(i));
-                System.out.println(IOHandler.getColor() +i + ". " + "Word: " + set.get(i).getWord() + "\tDefinition: " + set.get(i).getDefinition() +IOHandler.RESET);
             }
         }
         if (result.isEmpty()) {
-            System.out.println(IOHandler.getColor() +"No word has been found." +IOHandler.RESET);
+            System.out.println(IOHandler.getColor() + "No word has been found." + IOHandler.RESET);
+        }
+        if(!result.isEmpty()){
+            IOHandler.printFlashcards(res);
         }
         return result;
     }
@@ -59,53 +62,57 @@ public class Set {
      * @return returns ArrayList without the card that has been deleted.
      */
     public ArrayList<Flashcard> deleteCard() {
-        ArrayList<Flashcard> result = new ArrayList<Flashcard>();
-        result = searchSet();
-        System.out.println(IOHandler.getColor() +"Enter the index of the word you'd like to delete: " +IOHandler.RESET);
-        int delete = scan.nextInt();
+        Scanner input = new Scanner(System.in);
+        searchByWord();
+        System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to delete: " + IOHandler.RESET);
+        int delete = input.nextInt();
         for (int i = 0; i < set.size(); i++) {
             if (delete == i) {
                 set.remove(set.get(i));
             }
         }
-        return result;
+        return set;
     }
 
     public ArrayList<Flashcard> updateFlashcard() {
-        searchSet();
-        System.out.println(IOHandler.getColor() +"Enter the index of the word you'd like to edit: " +IOHandler.RESET);
-        int edit = scan.nextInt();
+        Scanner input = new Scanner(System.in);
+        searchByWord();
+        System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to edit: " + IOHandler.RESET);
+        int edit = input.nextInt();
         for (int i = 0; i < set.size(); i++) {
             if (edit == i) {
-                System.out.println(IOHandler.getColor() +"Would you like to change the word, the definition or both? w/d/b" +IOHandler.RESET);
-                char editWord = scan.next().charAt(0);
+                System.out.println(IOHandler.getColor() + "Would you like to change the word, the definition or both? w/d/b" + IOHandler.RESET);
+                char editWord = input.next().charAt(0);
                 switch (editWord) {
                     case 'w':
-                        System.out.println(IOHandler.getColor() +"Enter the new word: " +IOHandler.RESET);
+                        Scanner scan = new Scanner(System.in);
+                        System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String word = scan.nextLine();
                         set.get(i).setWord(word);
-                        System.out.println(IOHandler.getColor() +"Card edited!\nNew word: " + set.get(i).getWord() + "\nNew Definition: " + set.get(i).getDefinition() +IOHandler.RESET);
+                        IOHandler.printCards(set);
                         break;
 
                     case 'd':
-                        System.out.println(IOHandler.getColor() +"Enter the new definition: " +IOHandler.RESET);
-                        String def = scan.nextLine();
+                        Scanner sc = new Scanner(System.in);
+                        System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
+                        String def = sc.nextLine();
                         set.get(i).setDefinition(def);
-                        System.out.println(IOHandler.getColor() + "Card edited!\nNew word: " + set.get(i).getWord() + "\nNew Definition: " + set.get(i).getDefinition() +IOHandler.RESET);
+                        IOHandler.printCards(set);
                         break;
 
                     case 'b':
-                        System.out.println(IOHandler.getColor() +"Enter the new word: " +IOHandler.RESET);
-                        String newWord = scan.nextLine();
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
+                        String newWord = scanner.nextLine();
                         set.get(i).setWord(newWord);
-                        System.out.println(IOHandler.getColor() +"Enter the new definition: " +IOHandler.RESET);
-                        String newDef = scan.nextLine();
+                        System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
+                        String newDef = scanner.nextLine();
                         set.get(i).setDefinition(newDef);
-                        System.out.println(IOHandler.getColor() +"Card edited!\nNew word: " + set.get(i).getWord() + "\nNew Definition: " + set.get(i).getDefinition() +IOHandler.RESET);
+                        IOHandler.printCards(set);
                         break;
 
                     default:
-                        System.out.println(IOHandler.getColor() +"Invalid input. Try again." +IOHandler.RESET);
+                        System.out.println(IOHandler.getColor() + "Invalid input. Try again." + IOHandler.RESET);
                 }
             }
         }
