@@ -66,6 +66,7 @@ public class IOHandler {
             case "boc" -> setColor(CYAN_BACKGROUND + BLACK);
             case "g" -> setColor(GRAY);
             case "bog" -> setColor(GRAY_BACKGROUND + BLACK);
+            case "r" -> setColor(RED);
             case "bor" -> setColor(RED_BACKGROUND + BLACK);
             case "y" -> setColor(YELLOW);
             case "boy" -> setColor(YELLOW_BACKGROUND + BLACK);
