@@ -43,11 +43,11 @@ public class IOHandler {
         System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan (boc)              " + RESET + GRAY + " ║");
         System.out.println("║ Gray (g)                          ║");
         System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray (bog)              " + RESET + GRAY + " ║");
-        System.out.println("║ " + RED + "Red (r)                          " + RESET + "║");
+        System.out.println("║ " + RED + "Red (r)                           " + RESET + GRAY + "║");
         System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red (bor)               " + RESET + GRAY + " ║");
-        System.out.println("║ " + YELLOW + "Yellow (y)                        " + RESET + "║");
+        System.out.println("║ " + YELLOW + "Yellow (y)                        " + RESET + GRAY + "║");
         System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow (boy)            " + RESET + GRAY + " ║");
-        System.out.println("║ " + GREEN + "Green (gn)                        " + RESET + "║");
+        System.out.println("║ " + GREEN + "Green (gn)                        " + RESET + GRAY + "║");
         System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green (bogn)            " + RESET + GRAY + " ║");
         System.out.println("║ " + RESET + "White (w)                         " + GRAY + "║");
         System.out.println(GRAY + "╚═══════════════════════════════════╝");
