@@ -5,9 +5,6 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
-import com.sun.source.tree.WhileLoopTree;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
