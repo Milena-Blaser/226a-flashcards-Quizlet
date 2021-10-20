@@ -13,6 +13,12 @@ import java.util.Scanner;
  */
 public class IOHandler {
     public static Scanner scan = new Scanner(System.in);
+    public static final String RED = "\u001B[31m";
+    public static final String RED_BACKGROUND = "\u001B[41m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String GREEN_BACKGROUND = "\u001B[42m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String YELLOW_BACKGROUND = "\u001B[43m";
     public static final String BLUE_BACKGROUND = "\u001B[44m";
     public static final String PURPLE_BACKGROUND = "\u001B[45m";
     public static final String GRAY_BACKGROUND = "\u001B[47m";
@@ -37,6 +43,12 @@ public class IOHandler {
         System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan (boc)              " + RESET + GRAY + " ║");
         System.out.println("║ Gray (g)                          ║");
         System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray (bog)              " + RESET + GRAY + " ║");
+        System.out.println("║ " + RED + "Red (r)                          " + RESET + "║");
+        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red (bor)               " + RESET + GRAY + " ║");
+        System.out.println("║ " + YELLOW + "Yellow (y)                        " + RESET + "║");
+        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow (boy)            " + RESET + GRAY + " ║");
+        System.out.println("║ " + GREEN + "Green (gn)                        " + RESET + "║");
+        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green (bogn)            " + RESET + GRAY + " ║");
         System.out.println("║ " + RESET + "White (w)                         " + GRAY + "║");
         System.out.println(GRAY + "╚═══════════════════════════════════╝");
     }
@@ -54,6 +66,11 @@ public class IOHandler {
             case "boc" -> setColor(CYAN_BACKGROUND + BLACK);
             case "g" -> setColor(GRAY);
             case "bog" -> setColor(GRAY_BACKGROUND + BLACK);
+            case "bor" -> setColor(RED_BACKGROUND + BLACK);
+            case "y" -> setColor(YELLOW);
+            case "boy" -> setColor(YELLOW_BACKGROUND + BLACK);
+            case "gn" -> setColor(GREEN);
+            case "bogn" -> setColor(GREEN_BACKGROUND + BLACK);
             default -> setColor(RESET);
         }
     }
