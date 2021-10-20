@@ -39,7 +39,7 @@ public class Set {
     /**
      * @return returns an Arraylist with all results.
      */
-    public ArrayList<Flashcard> searchByWord() {
+    public ArrayList<Flashcard> searchSet() {
         ArrayList<Flashcard> result = new ArrayList<Flashcard>();
         System.out.println(IOHandler.getColor() +"Which word would you like to search for?" +IOHandler.RESET);
         String search = scan.nextLine();
@@ -60,7 +60,7 @@ public class Set {
      */
     public ArrayList<Flashcard> deleteCard() {
         ArrayList<Flashcard> result = new ArrayList<Flashcard>();
-        result = searchByWord();
+        result = searchSet();
         System.out.println(IOHandler.getColor() +"Enter the index of the word you'd like to delete: " +IOHandler.RESET);
         int delete = scan.nextInt();
         for (int i = 0; i < set.size(); i++) {
@@ -72,7 +72,7 @@ public class Set {
     }
 
     public ArrayList<Flashcard> updateFlashcard() {
-        searchByWord();
+        searchSet();
         System.out.println(IOHandler.getColor() +"Enter the index of the word you'd like to edit: " +IOHandler.RESET);
         int edit = scan.nextInt();
         for (int i = 0; i < set.size(); i++) {

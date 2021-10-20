@@ -97,8 +97,10 @@ public class QuizManager {
                 case 5:
                     break;
                 case 6:
+                    System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
                     break;
                 case 7:
+                    System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
                     break;
                 case 8:
                     System.exit(0);
