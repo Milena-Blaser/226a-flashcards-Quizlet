@@ -170,9 +170,9 @@ public class IOHandler {
         System.out.println(getColor() + "║─────────────────────────────────────────────────────────────────────────║" + RESET);
         System.out.println(getColor() + "║ Nr.  Word                                                    Definition ║" + RESET);
         System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
-            String toPad = (String.format("%-20s", card.getWord()) + "---->" + String.format("%40s", card.getDefinition()));
-            String padded = String.format("%-45s", toPad);
-            System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
+        String toPad = (String.format("%-20s", card.getWord()) + "---->" + String.format("%40s", card.getDefinition()));
+        String padded = String.format("%-45s", toPad);
+        System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
 

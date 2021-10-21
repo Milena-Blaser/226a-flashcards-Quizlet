@@ -29,7 +29,7 @@ public class QuizManager {
         return sets;
     }
 
-    public void changeSetTitle(){
+    public void changeSetTitle() {
         Scanner scan = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the title you'd like to change: " + IOHandler.RESET);

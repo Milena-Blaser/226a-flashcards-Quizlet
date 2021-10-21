@@ -43,7 +43,8 @@ public class Quiz {
                 case 3:
                     manager.deleteSet();
                     break;
-                case 4: manager.changeSetTitle();
+                case 4:
+                    manager.changeSetTitle();
                     break;
                 case 5:
                     manager.chooseAction();
