@@ -23,7 +23,7 @@ public class Set {
     /**
      * @return returns the ArrayList set with the added flashcard.
      */
-    public ArrayList<Flashcard> addFlashcard() {
+    public void addFlashcard() {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
         String word = input.nextLine();
@@ -32,36 +32,26 @@ public class Set {
         Flashcard newCard = new Flashcard(word, definition);
         set.add(newCard);
         System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
-        return set;
     }
 
     /**
      * @return returns an Arraylist with all results.
      */
-    public ArrayList<Flashcard> searchByWord() {
+    public void searchByWord() {
         Scanner input = new Scanner(System.in);
-        ArrayList<Flashcard> result = new ArrayList<Flashcard>();
-        Set res = new Set(result, "results");
         System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
         String search = input.nextLine();
         for (int i = 0; i < set.size(); i++) {
             if (set.get(i).getWord().toLowerCase().contains(search.toLowerCase())) {
-                result.add(set.get(i));
+                IOHandler.printCard(set.get(i), i);
             }
         }
-        if (result.isEmpty()) {
-            System.out.println(IOHandler.getColor() + "No word has been found." + IOHandler.RESET);
-        }
-        if(!result.isEmpty()){
-            IOHandler.printFlashcards(res);
-        }
-        return result;
     }
 
     /**
      * @return returns ArrayList without the card that has been deleted.
      */
-    public ArrayList<Flashcard> deleteCard() {
+    public void deleteCard() {
         Scanner input = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to delete: " + IOHandler.RESET);
@@ -71,10 +61,12 @@ public class Set {
                 set.remove(set.get(i));
             }
         }
-        return set;
     }
 
-    public ArrayList<Flashcard> updateFlashcard() {
+    /**
+     * @return returns the updated set
+     */
+    public void updateFlashcard() {
         Scanner input = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to edit: " + IOHandler.RESET);
@@ -89,7 +81,6 @@ public class Set {
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String word = scan.nextLine();
                         set.get(i).setWord(word);
-                        IOHandler.printCards(set);
                         break;
 
                     case 'd':
@@ -97,7 +88,6 @@ public class Set {
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String def = sc.nextLine();
                         set.get(i).setDefinition(def);
-                        IOHandler.printCards(set);
                         break;
 
                     case 'b':
@@ -108,15 +98,16 @@ public class Set {
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String newDef = scanner.nextLine();
                         set.get(i).setDefinition(newDef);
-                        IOHandler.printCards(set);
                         break;
 
                     default:
                         System.out.println(IOHandler.getColor() + "Invalid input. Try again." + IOHandler.RESET);
                 }
             }
+
         }
-        return set;
+
+
     }
 
     public ArrayList<Flashcard> getSet() {
@@ -134,5 +125,4 @@ public class Set {
     public void setTitle(String title) {
         this.title = title;
     }
-
 }

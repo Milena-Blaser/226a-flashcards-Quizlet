@@ -29,7 +29,7 @@ public class QuizManager {
         return sets;
     }
 
-    public ArrayList<Set> changeSetTitle(){
+    public void changeSetTitle(){
         Scanner scan = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the title you'd like to change: " + IOHandler.RESET);
@@ -42,10 +42,9 @@ public class QuizManager {
                 System.out.println("Title changed!");
             }
         }
-        return sets;
     }
 
-    public ArrayList<Set> deleteSet() {
+    public void deleteSet() {
         Scanner scan = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the set you'd like to delete: " + IOHandler.RESET);
@@ -55,24 +54,17 @@ public class QuizManager {
                 sets.remove(sets.get(i));
             }
         }
-        return sets;
     }
 
-    public ArrayList<Set> searchByWord() {
+    public void searchByWord() {
         Scanner scan = new Scanner(System.in);
-        ArrayList<Set> result = new ArrayList<Set>();
         System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
         String search = scan.nextLine();
         for (int i = 0; i < sets.size(); i++) {
             if (sets.get(i).getTitle().toLowerCase().contains(search.toLowerCase())) {
-                result.add(sets.get(i));
                 System.out.println(IOHandler.getColor() + i + ". " + "Title: " + sets.get(i).getTitle() + IOHandler.RESET);
             }
         }
-        if (result.isEmpty()) {
-            System.out.println(IOHandler.getColor() + "No set has been found." + IOHandler.RESET);
-        }
-        return result;
     }
 
     public Set chooseSet() {

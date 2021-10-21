@@ -35,43 +35,43 @@ public class IOHandler {
         System.out.println(GRAY + "╔═══════════════════════════════════╗");
         System.out.println(GRAY + "\u001B[1m║ Available colors:                 ║\u001B[0m");
         System.out.println(GRAY + "║───────────────────────────────────║");
-        System.out.println("║" + BLUE + " Blue (b)                          " + GRAY + "║");
-        System.out.println("║ " + BLUE_BACKGROUND + BLACK + "Black on blue (bob)              " + RESET + GRAY + " ║");
-        System.out.println("║" + PURPLE + " Purple (p)                        " + GRAY + "║");
-        System.out.println("║ " + PURPLE_BACKGROUND + BLACK + "Black on purple (bop)            " + RESET + GRAY + " ║");
-        System.out.println("║" + CYAN + " Cyan (c)                          " + GRAY + "║");
-        System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan (boc)              " + RESET + GRAY + " ║");
-        System.out.println("║ Gray (g)                          ║");
-        System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray (bog)              " + RESET + GRAY + " ║");
-        System.out.println("║ " + RED + "Red (r)                           " + RESET + GRAY + "║");
-        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red (bor)               " + RESET + GRAY + " ║");
-        System.out.println("║ " + YELLOW + "Yellow (y)                        " + RESET + GRAY + "║");
-        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow (boy)            " + RESET + GRAY + " ║");
-        System.out.println("║ " + GREEN + "Green (gn)                        " + RESET + GRAY + "║");
-        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green (bogn)            " + RESET + GRAY + " ║");
-        System.out.println("║ " + RESET + "White (w)                         " + GRAY + "║");
+        System.out.println("║" + BLUE + " Blue (1)                          " + GRAY + "║");
+        System.out.println("║ " + BLUE_BACKGROUND + BLACK + "Black on blue (2)                " + RESET + GRAY + " ║");
+        System.out.println("║" + PURPLE + " Purple (3)                        " + GRAY + "║");
+        System.out.println("║ " + PURPLE_BACKGROUND + BLACK + "Black on purple (4)              " + RESET + GRAY + " ║");
+        System.out.println("║" + CYAN + " Cyan (5)                          " + GRAY + "║");
+        System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan (6)                " + RESET + GRAY + " ║");
+        System.out.println("║ Gray (7)                          ║");
+        System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray (8)                " + RESET + GRAY + " ║");
+        System.out.println("║ " + RED + "Red (9)                           " + RESET + GRAY + "║");
+        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red (10)                " + RESET + GRAY + " ║");
+        System.out.println("║ " + YELLOW + "Yellow (11)                       " + RESET + GRAY + "║");
+        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow (12)             " + RESET + GRAY + " ║");
+        System.out.println("║ " + GREEN + "Green (13)                        " + RESET + GRAY + "║");
+        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green (14)              " + RESET + GRAY + " ║");
+        System.out.println("║ " + RESET + "White (15)                        " + GRAY + "║");
         System.out.println(GRAY + "╚═══════════════════════════════════╝");
     }
 
     public static void chooseColor() {
         printColors();
-        System.out.println(getColor() + "Enter the letters in braces to choose: " + RESET);
+        System.out.println(getColor() + "Enter the number in braces to choose: " + RESET);
         String chosen = scan.nextLine();
         switch (chosen.toLowerCase()) {
-            case "b" -> setColor(BLUE);
-            case "bob" -> setColor(BLUE_BACKGROUND + BLACK);
-            case "p" -> setColor(PURPLE);
-            case "bop" -> setColor(PURPLE_BACKGROUND + BLACK);
-            case "c" -> setColor(CYAN);
-            case "boc" -> setColor(CYAN_BACKGROUND + BLACK);
-            case "g" -> setColor(GRAY);
-            case "bog" -> setColor(GRAY_BACKGROUND + BLACK);
-            case "r" -> setColor(RED);
-            case "bor" -> setColor(RED_BACKGROUND + BLACK);
-            case "y" -> setColor(YELLOW);
-            case "boy" -> setColor(YELLOW_BACKGROUND + BLACK);
-            case "gn" -> setColor(GREEN);
-            case "bogn" -> setColor(GREEN_BACKGROUND + BLACK);
+            case "1" -> setColor(BLUE);
+            case "2" -> setColor(BLUE_BACKGROUND + BLACK);
+            case "3" -> setColor(PURPLE);
+            case "4" -> setColor(PURPLE_BACKGROUND + BLACK);
+            case "5" -> setColor(CYAN);
+            case "6" -> setColor(CYAN_BACKGROUND + BLACK);
+            case "7" -> setColor(GRAY);
+            case "8" -> setColor(GRAY_BACKGROUND + BLACK);
+            case "9" -> setColor(RED);
+            case "10" -> setColor(RED_BACKGROUND + BLACK);
+            case "11" -> setColor(YELLOW);
+            case "12" -> setColor(YELLOW_BACKGROUND + BLACK);
+            case "13" -> setColor(GREEN);
+            case "14" -> setColor(GREEN_BACKGROUND + BLACK);
             default -> setColor(RESET);
         }
     }
@@ -161,6 +161,18 @@ public class IOHandler {
             System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
 
         }
+        System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
+    }
+
+    public static void printCard(Flashcard card, int i) {
+        System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(getColor() + "\u001B[1m║ CARDS                                                                   ║\u001B[0m" + RESET);
+        System.out.println(getColor() + "║─────────────────────────────────────────────────────────────────────────║" + RESET);
+        System.out.println(getColor() + "║ Nr.  Word                                                    Definition ║" + RESET);
+        System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
+            String toPad = (String.format("%-20s", card.getWord()) + "---->" + String.format("%40s", card.getDefinition()));
+            String padded = String.format("%-45s", toPad);
+            System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
 
