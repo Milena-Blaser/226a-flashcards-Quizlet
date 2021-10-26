@@ -18,6 +18,15 @@ public class QuizManager {
         this.sets = sets;
     }
 
+    public static void startProgramm(){
+        ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
+        Set set = new Set(cards, " ");
+        ArrayList<Set> sets = new ArrayList<Set>();
+        QuizManager qm = new QuizManager(sets);
+        Quiz quiz = new Quiz(qm);
+        quiz.startQuiz();
+    }
+
     public ArrayList<Set> addSet() {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter the title of the set: " + IOHandler.RESET);

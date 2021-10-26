@@ -148,7 +148,7 @@ public class IOHandler {
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
 
-    public static void printCards(ArrayList<Flashcard> cards) {
+   /* public static void printCards(ArrayList<Flashcard> cards) {
         System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
         System.out.println(getColor() + "\u001B[1m║ CARDS                                                                   ║\u001B[0m" + RESET);
         System.out.println(getColor() + "║─────────────────────────────────────────────────────────────────────────║" + RESET);
@@ -162,7 +162,7 @@ public class IOHandler {
 
         }
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
-    }
+    }*/
 
     public static void printCard(Flashcard card, int i) {
         System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
