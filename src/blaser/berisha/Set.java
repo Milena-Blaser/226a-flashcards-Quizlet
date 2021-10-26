@@ -1,18 +1,113 @@
 package blaser.berisha;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
+/*
+ * Authors: Milena Blaser, Blerinë Berisha
+ * Project: Flashcards
+ */
+
+/**
+ * Class where Flashcards are saved. Here you can also add, delete and update Flashcards in a set.
+ */
 public class Set {
     private ArrayList<Flashcard> set;
     private String title;
-    private String zipCode;
-    private String country;
 
-    public Set(ArrayList<Flashcard> set, String title, String zipCode, String country) {
+    public Set(ArrayList<Flashcard> set, String title) {
         this.set = set;
         this.title = title;
-        this.zipCode = zipCode;
-        this.country = country;
+    }
+
+    /**
+     * @return returns the ArrayList set with the added flashcard.
+     */
+    public void addFlashcard() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
+        String word = input.nextLine();
+        System.out.println(IOHandler.getColor() + "Enter the definition: " + IOHandler.RESET);
+        String definition = input.nextLine();
+        Flashcard newCard = new Flashcard(word, definition);
+        set.add(newCard);
+        System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
+    }
+
+    /**
+     * @return returns an Arraylist with all results.
+     */
+    public void searchByWord() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
+        String search = input.nextLine();
+        for (int i = 0; i < set.size(); i++) {
+            if (set.get(i).getWord().toLowerCase().contains(search.toLowerCase())) {
+                IOHandler.printCard(set.get(i), i);
+            }
+        }
+    }
+
+    /**
+     * @return returns ArrayList without the card that has been deleted.
+     */
+    public void deleteCard() {
+        Scanner input = new Scanner(System.in);
+        searchByWord();
+        System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to delete: " + IOHandler.RESET);
+        int delete = input.nextInt();
+        for (int i = 0; i < set.size(); i++) {
+            if (delete == i) {
+                set.remove(set.get(i));
+            }
+        }
+    }
+
+    /**
+     * @return returns the updated set
+     */
+    public void updateFlashcard() {
+        Scanner input = new Scanner(System.in);
+        searchByWord();
+        System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to edit: " + IOHandler.RESET);
+        int edit = input.nextInt();
+        for (int i = 0; i < set.size(); i++) {
+            if (edit == i) {
+                System.out.println(IOHandler.getColor() + "Would you like to change the word, the definition or both? w/d/b" + IOHandler.RESET);
+                char editWord = input.next().charAt(0);
+                switch (editWord) {
+                    case 'w':
+                        Scanner scan = new Scanner(System.in);
+                        System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
+                        String word = scan.nextLine();
+                        set.get(i).setWord(word);
+                        break;
+
+                    case 'd':
+                        Scanner sc = new Scanner(System.in);
+                        System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
+                        String def = sc.nextLine();
+                        set.get(i).setDefinition(def);
+                        break;
+
+                    case 'b':
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
+                        String newWord = scanner.nextLine();
+                        set.get(i).setWord(newWord);
+                        System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
+                        String newDef = scanner.nextLine();
+                        set.get(i).setDefinition(newDef);
+                        break;
+
+                    default:
+                        System.out.println(IOHandler.getColor() + "Invalid input. Try again." + IOHandler.RESET);
+                }
+            }
+
+        }
+
+
     }
 
     public ArrayList<Flashcard> getSet() {
@@ -29,21 +124,5 @@ public class Set {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 }
