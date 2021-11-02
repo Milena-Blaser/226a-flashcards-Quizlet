@@ -147,22 +147,6 @@ public class IOHandler {
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
 
-   /* public static void printCards(ArrayList<Flashcard> cards) {
-        System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
-        System.out.println(getColor() + "\u001B[1m║ CARDS                                                                   ║\u001B[0m" + RESET);
-        System.out.println(getColor() + "║─────────────────────────────────────────────────────────────────────────║" + RESET);
-        System.out.println(getColor() + "║ Nr.  Word                                                    Definition ║" + RESET);
-        System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET)
-        ;
-        for (int i = 0; i < cards.size(); i++) {
-            String toPad = (String.format("%-20s", cards.get(i).getWord()) + "---->" + String.format("%40s", cards.get(i).getDefinition()));
-            String padded = String.format("%-45s", toPad);
-            System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
-
-        }
-        System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
-    }*/
-
     public static void printCard(Flashcard card, int i) {
         System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
         System.out.println(getColor() + "\u001B[1m║ CARDS                                                                   ║\u001B[0m" + RESET);
@@ -203,23 +187,45 @@ public class IOHandler {
                     setting = 1;
                 }
                 printFlipcard(setting, set, card);
-            }
-            else if(answer == 2) {
+            } else if (answer == 2) {
                 System.out.println("Did you get the word correct(1), partially correct(2) or wrong(3)?");
                 int status = scan.nextInt();
-                if(status == 1){
+                if (status == 1) {
                     card.setStatus(card.getStatus() + 1);
-                }
-                else if(status == 2){
+                } else if (status == 2) {
                     card.setStatus(card.getStatus() + 0.5);
                 }
 
-            }
-            else{
+            } else {
                 System.out.println("Invalid input! Either enter 1 or 2!");
             }
         }
         while (answer != 1 && answer != 2);
+    }
+
+    public static void printLearningCard(int setting, Set set, Flashcard card, int i) {
+        i++;
+        String word;
+        if (setting == 1) {
+            word = card.getWord();
+        } else {
+            word = card.getDefinition();
+        }
+        String correct = "ooo";
+        String status = card.printStatus();
+
+        correct = correct.concat(status).substring(status.length());
+        String toPad = (String.format("%45s", word) + String.format("%28s", " "));
+        String padded = String.format("%45s", toPad);
+        String filler = String.format("%57s", " ");
+        String filler2 = String.format("%27s", " ");
+        System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(getColor() + "\u001B[1m║" + set.getTitle() +  filler2 + "Correct: " + correct + filler2 + i + "/" + set.getSet().size() + "║\u001B[0m" + RESET);
+        System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
+        System.out.println(getColor() + "\u001B[1m║" + padded + "║\u001B[0m" + RESET);
+        System.out.println(getColor() + "║ " + "Skip(1) " + filler + "End(2)" + " ║" + RESET);
+        System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
+
     }
 
 

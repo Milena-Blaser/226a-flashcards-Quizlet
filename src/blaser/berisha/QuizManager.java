@@ -20,11 +20,19 @@ public class QuizManager {
 
     public static void startProgramm(){
         ArrayList<Flashcard> cards = new ArrayList<>();
-        Flashcard card = new Flashcard("a super long word", "a random thing");
-        Flashcard card1 = new Flashcard("another word", "wow so cool!");
+        Flashcard card = new Flashcard(" first word", "one");
+        Flashcard card1 = new Flashcard("second word", "two");
+        Flashcard card2 = new Flashcard("third word", "three");
+        Flashcard card3 = new Flashcard("fourth word", "four");
+        Flashcard card4 = new Flashcard("fifth word", "five");
+        Flashcard card5 = new Flashcard("sixth word", "six");
         Set set = new Set(cards,"test" );
         set.getSet().add(card);
         set.getSet().add(card1);
+        set.getSet().add(card2);
+        set.getSet().add(card3);
+        set.getSet().add(card4);
+        set.getSet().add(card5);
         ArrayList<Set> sets = new ArrayList<>();
         sets.add(set);
         QuizManager qm = new QuizManager(sets);
@@ -83,7 +91,8 @@ public class QuizManager {
 
     public Set chooseSet() {
         Scanner scan = new Scanner(System.in);
-        searchByWord();
+        //searchByWord();
+        IOHandler.printSets(QuizManager.this);
         Set result = new Set(new ArrayList<>(), " ");
         System.out.println(IOHandler.getColor() + "Enter the index of the set you'd like to practice: " + IOHandler.RESET);
         int answer = scan.nextInt();
@@ -125,7 +134,7 @@ public class QuizManager {
                     Quiz.practiceFlashcards(result);
                     break;
                 case 7:
-                    System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
+                    Quiz.learnWords(result);
                     break;
                 case 8:
                     System.exit(0);

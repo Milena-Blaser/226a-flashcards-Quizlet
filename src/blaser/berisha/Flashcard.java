@@ -21,6 +21,14 @@ public class Flashcard {
     public Flashcard(){
 
     }
+    public String printStatus(){
+        String printableStatus = "";
+        int countCorrectAnswer = (int) this.getStatus();
+        for(int i = 0; i < countCorrectAnswer; i++){
+            printableStatus += "*";
+        }
+        return printableStatus;
+    }
 
     public String getWord() {
         return word;
