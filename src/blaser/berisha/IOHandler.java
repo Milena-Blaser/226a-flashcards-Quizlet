@@ -5,7 +5,6 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -175,6 +174,54 @@ public class IOHandler {
         System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
+
+    public static void printFlipcard(int setting, Set set, Flashcard card) {
+        int answer;
+        String word;
+        do {
+            if (setting == 1) {
+                word = card.getWord();
+            } else {
+                word = card.getDefinition();
+
+
+            }
+            System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
+            System.out.println(getColor() + "\u001B[1m║" + set.getTitle() + "                                                                    " + set.getSet().size() + "║\u001B[0m" + RESET);
+            System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
+            String toPad = (String.format("%45s", word) + String.format("%28s", " "));
+            String padded = String.format("%45s", toPad);
+            String filler = String.format("%56s", " ");
+            System.out.println(getColor() + "\u001B[1m║" + padded + "║\u001B[0m" + RESET);
+            System.out.println(getColor() + "║ " + "Flip(1) " + filler + "Next(2)" + " ║" + RESET);
+            System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
+            answer = scan.nextInt();
+            if (answer == 1) {
+                if (setting == 1) {
+                    setting = 2;
+                } else {
+                    setting = 1;
+                }
+                printFlipcard(setting, set, card);
+            }
+            else if(answer == 2) {
+                System.out.println("Did you get the word correct(1), partially correct(2) or wrong(3)?");
+                int status = scan.nextInt();
+                if(status == 1){
+                    card.setStatus(card.getStatus() + 1);
+                }
+                else if(status == 2){
+                    card.setStatus(card.getStatus() + 0.5);
+                }
+
+            }
+            else{
+                System.out.println("Invalid input! Either enter 1 or 2!");
+            }
+        }
+        while (answer != 1 && answer != 2);
+    }
+
 
     public static String getColor() {
         return color;
