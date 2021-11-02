@@ -5,6 +5,7 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,7 @@ import java.util.Scanner;
  */
 public class Quiz {
     private QuizManager manager;
+    Scanner scan = new Scanner(System.in);
 
 
     public Quiz(QuizManager manager) {
@@ -26,6 +28,7 @@ public class Quiz {
     public void setManager(QuizManager manager) {
         this.manager = manager;
     }
+
 
     public void startQuiz() {
         Scanner scan = new Scanner(System.in);
@@ -62,4 +65,23 @@ public class Quiz {
             choice = scan.nextInt();
         }
     }
+    public static void practiceFlashcards(Set set){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Would you like to guess the word(1) or the defintion of the word(2)?");
+        int setting = scan.nextInt();
+        int setLength = set.getSet().size();
+        int correctWords = 0;
+        do {
+            for (int i = 0; i < setLength; i++) {
+                if (set.getSet().get(i).getStatus() < 3) {
+                    IOHandler.printFlipcard(setting, set, set.getSet().get(i));
+                } else {
+                    correctWords += 1;
+                }
+            }
+        }while (correctWords < setLength);
+        System.out.println("Well done you went through the whole set!");
+
+    }
+
 }

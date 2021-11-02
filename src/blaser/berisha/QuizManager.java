@@ -19,9 +19,14 @@ public class QuizManager {
     }
 
     public static void startProgramm(){
-        ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
-        Set set = new Set(cards, " ");
-        ArrayList<Set> sets = new ArrayList<Set>();
+        ArrayList<Flashcard> cards = new ArrayList<>();
+        Flashcard card = new Flashcard("a super long word", "a random thing");
+        Flashcard card1 = new Flashcard("another word", "wow so cool!");
+        Set set = new Set(cards,"test" );
+        set.getSet().add(card);
+        set.getSet().add(card1);
+        ArrayList<Set> sets = new ArrayList<>();
+        sets.add(set);
         QuizManager qm = new QuizManager(sets);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
@@ -31,7 +36,7 @@ public class QuizManager {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter the title of the set: " + IOHandler.RESET);
         String setTitle = scan.nextLine();
-        ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
+        ArrayList<Flashcard> cards = new ArrayList<>();
         Set newSet = new Set(cards, setTitle);
         sets.add(newSet);
         System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
@@ -79,7 +84,7 @@ public class QuizManager {
     public Set chooseSet() {
         Scanner scan = new Scanner(System.in);
         searchByWord();
-        Set result = new Set(new ArrayList<Flashcard>(), " ");
+        Set result = new Set(new ArrayList<>(), " ");
         System.out.println(IOHandler.getColor() + "Enter the index of the set you'd like to practice: " + IOHandler.RESET);
         int answer = scan.nextInt();
         int count = 0;
@@ -117,7 +122,7 @@ public class QuizManager {
                 case 5:
                     break;
                 case 6:
-                    System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
+                    Quiz.practiceFlashcards(result);
                     break;
                 case 7:
                     System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
