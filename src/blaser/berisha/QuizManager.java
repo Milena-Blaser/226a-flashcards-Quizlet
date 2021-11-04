@@ -18,11 +18,33 @@ public class QuizManager {
         this.sets = sets;
     }
 
+    public static void startProgramm(){
+        ArrayList<Flashcard> cards = new ArrayList<>();
+        Flashcard card = new Flashcard(" first word", "one");
+        Flashcard card1 = new Flashcard("second word", "two");
+        Flashcard card2 = new Flashcard("third word", "three");
+        Flashcard card3 = new Flashcard("fourth word", "four");
+        Flashcard card4 = new Flashcard("fifth word", "five");
+        Flashcard card5 = new Flashcard("sixth word", "six");
+        Set set = new Set(cards,"test" );
+        set.getSet().add(card);
+        set.getSet().add(card1);
+        set.getSet().add(card2);
+        set.getSet().add(card3);
+        set.getSet().add(card4);
+        set.getSet().add(card5);
+        ArrayList<Set> sets = new ArrayList<>();
+        sets.add(set);
+        QuizManager qm = new QuizManager(sets);
+        Quiz quiz = new Quiz(qm);
+        quiz.startQuiz();
+    }
+
     public ArrayList<Set> addSet() {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter the title of the set: " + IOHandler.RESET);
         String setTitle = scan.nextLine();
-        ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
+        ArrayList<Flashcard> cards = new ArrayList<>();
         Set newSet = new Set(cards, setTitle);
         sets.add(newSet);
         System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
@@ -69,8 +91,9 @@ public class QuizManager {
 
     public Set chooseSet() {
         Scanner scan = new Scanner(System.in);
-        searchByWord();
-        Set result = new Set(new ArrayList<Flashcard>(), " ");
+        //searchByWord();
+        IOHandler.printSets(QuizManager.this);
+        Set result = new Set(new ArrayList<>(), " ");
         System.out.println(IOHandler.getColor() + "Enter the index of the set you'd like to practice: " + IOHandler.RESET);
         int answer = scan.nextInt();
         int count = 0;
@@ -108,10 +131,10 @@ public class QuizManager {
                 case 5:
                     break;
                 case 6:
-                    System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
+                    Quiz.practiceFlashcards(result);
                     break;
                 case 7:
-                    System.out.println(IOHandler.getColor() + "Doesn't work yet." + IOHandler.RESET);
+                    Quiz.learnWords(result);
                     break;
                 case 8:
                     System.exit(0);

@@ -11,7 +11,7 @@ package blaser.berisha;
 public class Flashcard {
     private String word;
     private String definition;
-    private boolean isCorrect;
+    private double status;
 
     public Flashcard(String word, String definition) {
         this.word = word;
@@ -20,6 +20,14 @@ public class Flashcard {
 
     public Flashcard(){
 
+    }
+    public String printStatus(){
+        String printableStatus = "";
+        int countCorrectAnswer = (int) this.getStatus();
+        for(int i = 0; i < countCorrectAnswer; i++){
+            printableStatus += "*";
+        }
+        return printableStatus;
     }
 
     public String getWord() {
@@ -38,11 +46,11 @@ public class Flashcard {
         this.definition = definition;
     }
 
-    public boolean isCorrect() {
-        return isCorrect;
+    public double getStatus() {
+        return status;
     }
 
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
+    public void setStatus(double status) {
+        this.status = status;
     }
 }
