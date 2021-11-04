@@ -12,6 +12,7 @@ import java.util.Scanner;
  * Class to administer all sets. Here you can show, create and delete sets.
  */
 public class QuizManager {
+    private static ArrayList<Set> sets1;
     private ArrayList<Set> sets;
 
     public QuizManager(ArrayList<Set> sets) {
@@ -19,7 +20,7 @@ public class QuizManager {
     }
 
     public static void startProgramm(){
-        ArrayList<Flashcard> cards = new ArrayList<>();
+        /*ArrayList<Flashcard> cards = new ArrayList<>();
         Flashcard card = new Flashcard(" first word", "one");
         Flashcard card1 = new Flashcard("second word", "two");
         Flashcard card2 = new Flashcard("third word", "three");
@@ -32,10 +33,10 @@ public class QuizManager {
         set.getSet().add(card2);
         set.getSet().add(card3);
         set.getSet().add(card4);
-        set.getSet().add(card5);
-        ArrayList<Set> sets = new ArrayList<>();
-        sets.add(set);
-        QuizManager qm = new QuizManager(sets);
+        set.getSet().add(card5);*/
+        ArrayList<Set> sets1 = new ArrayList<>();
+        //sets.add(set);
+        QuizManager qm = new QuizManager(sets1);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
     }
