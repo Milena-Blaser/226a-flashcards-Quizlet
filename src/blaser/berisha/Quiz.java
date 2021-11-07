@@ -5,6 +5,8 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Array;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -52,7 +54,12 @@ public class Quiz {
                     manager.changeSetTitle();
                     break;
                 case 5:
-                    manager.chooseAction();
+                    if(manager.getSets().size() != 0) {
+                        manager.chooseAction();
+                    }
+                    else{
+                        System.err.println("You have to add a set before you can choose one.");
+                    }
                     break;
                 case 6:
                     IOHandler.chooseColor();
@@ -70,7 +77,7 @@ public class Quiz {
 
     public static void practiceFlashcards(Set set) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Would you like to guess the word(1) or the defintion of the word(2)?");
+        System.out.println("Would you like to guess the word(1) or the definition of the word(2)?");
         int setting = scan.nextInt();
         int setLength = set.getSet().size();
         int correctWords = 0;
@@ -160,6 +167,4 @@ public class Quiz {
             System.out.println("Well done you got all the cards correct!");
         }
     }
-
-
 }

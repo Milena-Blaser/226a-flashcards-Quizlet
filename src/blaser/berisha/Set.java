@@ -124,8 +124,6 @@ public class Set {
             }
 
         }
-
-
     }
 
     public ArrayList<Flashcard> getSet() {
