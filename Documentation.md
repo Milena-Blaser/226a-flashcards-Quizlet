@@ -1,4 +1,4 @@
-#Introduction#
+##Introduction
 
 The task of this project is to create an app of our liking. We have decided to program a flashcard app, with which you can study. 
 In the flashcard app, the user can: 
