@@ -59,8 +59,9 @@ public class Set {
         int delete = input.nextInt();
         for (int i = 0; i < set.size(); i++) {
             if (delete == i) {
-                set.remove(set.get(i));
+
                 FileHandler.deleteFlashcardFromFile(wholeSet, set.get(i));
+                set.remove(set.get(i));
             }
         }
     }

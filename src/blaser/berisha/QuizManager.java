@@ -50,7 +50,9 @@ public class QuizManager {
             if (edit == i) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Enter the new title: ");
-                sets.get(i).setTitle(scanner.nextLine());
+                String title = scanner.nextLine();
+                FileHandler.updateSetFile(sets.get(i), title);
+                sets.get(i).setTitle(title);
                 System.out.println("Title changed!");
             }
         }
@@ -63,6 +65,7 @@ public class QuizManager {
         int delete = scan.nextInt();
         for (int i = 0; i < sets.size(); i++) {
             if (delete == i) {
+                FileHandler.deleteFromSetFile(sets.get(i));
                 sets.remove(sets.get(i));
             }
         }
