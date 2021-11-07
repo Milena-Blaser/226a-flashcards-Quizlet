@@ -35,7 +35,6 @@ public class Quiz {
 
     public void startQuiz() {
         Scanner scan = new Scanner(System.in);
-        //IOHandler.chooseColor();
         IOHandler.printStartMenu();
         int choice = scan.nextInt();
         while (choice != 7) {

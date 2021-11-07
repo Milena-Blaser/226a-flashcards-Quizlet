@@ -24,11 +24,20 @@ public class Set {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
         String word = input.nextLine();
+        boolean isWordOkay = IOHandler.printMessages(20, word);
         System.out.println(IOHandler.getColor() + "Enter the definition: " + IOHandler.RESET);
         String definition = input.nextLine();
-        Flashcard newCard = new Flashcard(word, definition);
-        set.add(newCard);
-        System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
+        boolean isDefinitionOkay = IOHandler.printMessages(40, definition);
+
+        if (isWordOkay && isDefinitionOkay) {
+            Flashcard newCard = new Flashcard(word, definition);
+            set.add(newCard);
+            System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
+        } else if (!isWordOkay) {
+            System.err.println("Card not added. See error message(s).");
+        } else if (!isDefinitionOkay) {
+            System.err.println("Card not added. See error message(s).");
+        }
     }
 
     public void searchByWord() {
@@ -68,7 +77,12 @@ public class Set {
                         Scanner scan = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String word = scan.nextLine();
-                        set.get(i).setWord(word);
+                        boolean isWordOkay = IOHandler.printMessages(20, word);
+                        if (isWordOkay) {
+                            set.get(i).setWord(word);
+                        } else if (!isWordOkay) {
+                            System.err.println("Could not update card.");
+                        }
                         break;
 
                     case 'd':
@@ -76,16 +90,32 @@ public class Set {
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String def = sc.nextLine();
                         set.get(i).setDefinition(def);
+                        boolean isDefinitionOkay = IOHandler.printMessages(20, def);
+                        if (isDefinitionOkay) {
+                            set.get(i).setWord(def);
+                        } else if (!isDefinitionOkay) {
+                            System.err.println("Could not update card.");
+                        }
                         break;
 
                     case 'b':
                         Scanner scanner = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String newWord = scanner.nextLine();
-                        set.get(i).setWord(newWord);
+                        isWordOkay = IOHandler.printMessages(20, newWord);
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String newDef = scanner.nextLine();
-                        set.get(i).setDefinition(newDef);
+                        isDefinitionOkay = IOHandler.printMessages(20, newDef);
+
+                        if (isWordOkay && isDefinitionOkay) {
+                            set.get(i).setWord(newWord);
+                            set.get(i).setDefinition(newDef);
+                            System.out.println(IOHandler.getColor() + "Card updated!" + IOHandler.RESET);
+                        } else if (!isWordOkay) {
+                            System.err.println("Card not added. See error message(s).");
+                        } else if (!isDefinitionOkay) {
+                            System.err.println("Card not added. See error message(s).");
+                        }
                         break;
 
                     default:
