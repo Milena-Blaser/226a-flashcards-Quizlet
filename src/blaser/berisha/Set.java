@@ -23,7 +23,7 @@ public class Set {
     /**
      * @return returns the ArrayList set with the added flashcard.
      */
-    public void addFlashcard() {
+    public void addFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
         String word = input.nextLine();
@@ -31,6 +31,7 @@ public class Set {
         String definition = input.nextLine();
         Flashcard newCard = new Flashcard(word, definition);
         set.add(newCard);
+        FileHandler.addFlashcardsToFile(wholeSet);
         System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
     }
 
@@ -51,7 +52,7 @@ public class Set {
     /**
      * @return returns ArrayList without the card that has been deleted.
      */
-    public void deleteCard() {
+    public void deleteCard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to delete: " + IOHandler.RESET);
@@ -59,6 +60,7 @@ public class Set {
         for (int i = 0; i < set.size(); i++) {
             if (delete == i) {
                 set.remove(set.get(i));
+                FileHandler.deleteFlashcardFromFile(wholeSet, set.get(i));
             }
         }
     }
@@ -66,13 +68,14 @@ public class Set {
     /**
      * @return returns the updated set
      */
-    public void updateFlashcard() {
+    public void updateFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to edit: " + IOHandler.RESET);
         int edit = input.nextInt();
         for (int i = 0; i < set.size(); i++) {
             if (edit == i) {
+                Flashcard card = set.get(i);
                 System.out.println(IOHandler.getColor() + "Would you like to change the word, the definition or both? w/d/b" + IOHandler.RESET);
                 char editWord = input.next().charAt(0);
                 switch (editWord) {
@@ -80,6 +83,7 @@ public class Set {
                         Scanner scan = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String word = scan.nextLine();
+                        FileHandler.updateFlashcardInFile(wholeSet, card, word + "," + card.getDefinition());
                         set.get(i).setWord(word);
                         break;
 
@@ -87,6 +91,7 @@ public class Set {
                         Scanner sc = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String def = sc.nextLine();
+                        FileHandler.updateFlashcardInFile(wholeSet, card, card.getWord() + "," + def);
                         set.get(i).setDefinition(def);
                         break;
 
@@ -94,9 +99,10 @@ public class Set {
                         Scanner scanner = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String newWord = scanner.nextLine();
-                        set.get(i).setWord(newWord);
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String newDef = scanner.nextLine();
+                        FileHandler.updateFlashcardInFile(wholeSet, card, newWord + "," + newDef);
+                        set.get(i).setWord(newWord);
                         set.get(i).setDefinition(newDef);
                         break;
 

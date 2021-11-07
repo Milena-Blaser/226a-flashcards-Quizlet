@@ -1,5 +1,6 @@
 package blaser.berisha;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,22 +20,12 @@ public class QuizManager {
     }
 
     public static void startProgramm(){
-        ArrayList<Flashcard> cards = new ArrayList<>();
-        Flashcard card = new Flashcard(" first word", "one");
-        Flashcard card1 = new Flashcard("second word", "two");
-        Flashcard card2 = new Flashcard("third word", "three");
-        Flashcard card3 = new Flashcard("fourth word", "four");
-        Flashcard card4 = new Flashcard("fifth word", "five");
-        Flashcard card5 = new Flashcard("sixth word", "six");
-        Set set = new Set(cards,"test" );
-        set.getSet().add(card);
-        set.getSet().add(card1);
-        set.getSet().add(card2);
-        set.getSet().add(card3);
-        set.getSet().add(card4);
-        set.getSet().add(card5);
         ArrayList<Set> sets = new ArrayList<>();
-        sets.add(set);
+        FileHandler.addToSetFile(sets);
+        FileHandler.readSetFile(sets);
+        for(int i = 0; i < sets.size(); i++){
+            FileHandler.readFlashcards(sets.get(i));
+        }
         QuizManager qm = new QuizManager(sets);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
@@ -47,6 +38,8 @@ public class QuizManager {
         ArrayList<Flashcard> cards = new ArrayList<>();
         Set newSet = new Set(cards, setTitle);
         sets.add(newSet);
+        FileHandler.createSetFile(newSet);
+        FileHandler.addToSetFile(sets);
         System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
         return sets;
     }
@@ -120,13 +113,13 @@ public class QuizManager {
                     IOHandler.printFlashcards(result);
                     break;
                 case 2:
-                    result.addFlashcard();
+                    result.addFlashcard(result);
                     break;
                 case 3:
-                    result.updateFlashcard();
+                    result.updateFlashcard(result);
                     break;
                 case 4:
-                    result.deleteCard();
+                    result.deleteCard(result);
                     break;
                 case 6:
                     Quiz.practiceFlashcards(result);
