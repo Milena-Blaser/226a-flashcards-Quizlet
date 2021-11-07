@@ -12,7 +12,6 @@ import java.util.Scanner;
  * Class to administer all sets. Here you can show, create and delete sets.
  */
 public class QuizManager {
-    private static ArrayList<Set> sets1;
     private ArrayList<Set> sets;
 
     public QuizManager(ArrayList<Set> sets) {

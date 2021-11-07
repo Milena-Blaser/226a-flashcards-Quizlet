@@ -18,9 +18,6 @@ public class Flashcard {
         this.definition = definition;
     }
 
-    public Flashcard(){
-
-    }
     public String printStatus(){
         String printableStatus = "";
         int countCorrectAnswer = (int) this.getStatus();

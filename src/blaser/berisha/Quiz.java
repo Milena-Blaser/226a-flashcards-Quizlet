@@ -54,10 +54,9 @@ public class Quiz {
                     manager.changeSetTitle();
                     break;
                 case 5:
-                    if(manager.getSets().size() != 0) {
+                    if (manager.getSets().size() != 0) {
                         manager.chooseAction();
-                    }
-                    else{
+                    } else {
                         System.err.println("You have to add a set before you can choose one.");
                     }
                     break;
@@ -93,9 +92,10 @@ public class Quiz {
         System.out.println("Well done you went through the whole set!");
 
     }
-    public static ArrayList<Integer> getRandomOrder(Set set ){
+
+    public static ArrayList<Integer> getRandomOrder(Set set) {
         ArrayList<Integer> indexList = new ArrayList<>();
-        for(int i = 0; i < set.getSet().size(); i++){
+        for (int i = 0; i < set.getSet().size(); i++) {
             indexList.add(i);
         }
         Collections.shuffle(indexList);
@@ -129,7 +129,7 @@ public class Quiz {
                     guessedAnswer = scanner.nextLine();
                     definition = set.getSet().get(randomIndex.get(i)).getDefinition().toLowerCase();
                     word = set.getSet().get(randomIndex.get(i)).getWord().toLowerCase();
-                    if(checkingSetting == 2){
+                    if (checkingSetting == 2) {
                         guessedAnswer = guessedAnswer.toLowerCase();
                         definition = definition.toLowerCase();
                         word = word.toLowerCase();
@@ -151,7 +151,7 @@ public class Quiz {
                         do {
                             System.out.println("Repeat the word: ");
                             guessedAnswer = scanner.nextLine();
-                        }while(!guessedAnswer.equals(definition) && wordSetting == 1 || wordSetting == 2 && !guessedAnswer.equals(word));
+                        } while (!guessedAnswer.equals(definition) && wordSetting == 1 || wordSetting == 2 && !guessedAnswer.equals(word));
                     }
                 } else {
                     correctWords += 1;
