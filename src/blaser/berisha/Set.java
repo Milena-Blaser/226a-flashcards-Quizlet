@@ -20,9 +20,6 @@ public class Set {
         this.title = title;
     }
 
-    /**
-     * @return returns the ArrayList set with the added flashcard.
-     */
     public void addFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
@@ -35,9 +32,6 @@ public class Set {
         System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
     }
 
-    /**
-     * @return returns an Arraylist with all results.
-     */
     public void searchByWord() {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
@@ -49,9 +43,6 @@ public class Set {
         }
     }
 
-    /**
-     * @return returns ArrayList without the card that has been deleted.
-     */
     public void deleteCard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
@@ -65,9 +56,6 @@ public class Set {
         }
     }
 
-    /**
-     * @return returns the updated set
-     */
     public void updateFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
