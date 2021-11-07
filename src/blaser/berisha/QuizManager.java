@@ -128,8 +128,6 @@ public class QuizManager {
                 case 4:
                     result.deleteCard();
                     break;
-                case 5:
-                    break;
                 case 6:
                     Quiz.practiceFlashcards(result);
                     break;
@@ -151,4 +149,5 @@ public class QuizManager {
     public void setSets(ArrayList<Set> sets) {
         this.sets = sets;
     }
+
 }

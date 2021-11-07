@@ -5,8 +5,6 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -33,7 +31,7 @@ public class Quiz {
     }
 
 
-    public void startQuiz() {
+    public void  startQuiz() {
         Scanner scan = new Scanner(System.in);
         IOHandler.chooseColor();
         IOHandler.printStartMenu();
@@ -109,7 +107,6 @@ public class Quiz {
         String word;
         String guessedAnswer = "";
         scanner.nextLine();
-
 
         do {
             ArrayList<Integer> randomIndex = getRandomOrder(set);
