@@ -23,9 +23,6 @@ public class QuizManager {
         ArrayList<Set> sets = new ArrayList<>();
         FileHandler.addToSetFile(sets);
         FileHandler.readSetFile(sets);
-        for(int i = 0; i < sets.size(); i++){
-            FileHandler.readFlashcards(sets.get(i));
-        }
         QuizManager qm = new QuizManager(sets);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
@@ -92,8 +89,10 @@ public class QuizManager {
         int count = 0;
         for (int i = 0; i < sets.size(); i++) {
             if (answer == i) {
+
                 result.setSet(sets.get(i).getSet());
                 result.setTitle(sets.get(i).getTitle());
+
                 count++;
                 System.out.println(IOHandler.getColor() + "Found " + count + " set(s)." + IOHandler.RESET);
                 System.out.println(sets.get(i).getTitle());
@@ -106,6 +105,7 @@ public class QuizManager {
         Scanner scanner = new Scanner(System.in);
         Set result = chooseSet();
         IOHandler.printSetMenu();
+        FileHandler.readFlashcards(result);
         int choice = scanner.nextInt();
         while (choice != 5) {
             switch (choice) {
@@ -137,10 +137,6 @@ public class QuizManager {
 
     public ArrayList<Set> getSets() {
         return sets;
-    }
-
-    public void setSets(ArrayList<Set> sets) {
-        this.sets = sets;
     }
 
 }

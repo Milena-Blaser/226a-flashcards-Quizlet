@@ -26,13 +26,7 @@ public class Quiz {
         return manager;
     }
 
-    public void setManager(QuizManager manager) {
-        this.manager = manager;
-    }
-
-
     public void  startQuiz() {
-        Scanner scan = new Scanner(System.in);
         IOHandler.chooseColor();
         IOHandler.printStartMenu();
         int choice = scan.nextInt();

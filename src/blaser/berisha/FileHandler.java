@@ -1,6 +1,5 @@
 package blaser.berisha;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -13,18 +12,13 @@ import java.util.ArrayList;
  **************************************************************/
 
 public class FileHandler {
-    private static BufferedWriter bufferedWriter;
-    private static BufferedReader bufferedReader;
-    private static int sets = 0;
-
+    private static String line;
 
     public static void createSetFile(Set set) {
-        String name = set.getTitle();
-        String word;
         try {
-            FileWriter file = new FileWriter(name + ".txt");
-            bufferedWriter = new BufferedWriter(file);
-            bufferedWriter.close();
+            FileWriter fileWriter = new FileWriter(set.getTitle() + ".txt");
+            fileWriter.flush();
+            fileWriter.close();
         } catch (Exception e) {
             e.getStackTrace();
         }
@@ -32,24 +26,25 @@ public class FileHandler {
 
     public static void addFlashcardsToFile(Set set) {
         File file = new File(set.getTitle() + ".txt");
-        String word;
         try {
-            FileWriter fr = new FileWriter(file, true);
-            bufferedWriter = new BufferedWriter(fr);
-            bufferedReader = new BufferedReader(new FileReader(file));
+            FileWriter fileWriter = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             for (int i = 0; i < set.getSet().size(); i++) {
-                word = set.getSet().get(i).getWord() + "," + set.getSet().get(i).getDefinition();
+                line = set.getSet().get(i).getWord() + "," + set.getSet().get(i).getDefinition();
                 while (true) {
-                    if (!word.equals(bufferedReader.readLine())) {
-                        bufferedWriter.write(word);
+                    if (!line.equals(bufferedReader.readLine())) {
+                        bufferedWriter.write(line);
                         bufferedWriter.newLine();
                     }
                     break;
                 }
             }
+            bufferedWriter.flush();
             bufferedWriter.close();
             bufferedReader.close();
-            fr.close();
+            fileWriter.flush();
+            fileWriter.close();
         } catch (Exception e) {
             e.getStackTrace();
         }
@@ -59,34 +54,36 @@ public class FileHandler {
         String lineToRemove = card.getWord() + "," + card.getDefinition();
         File file = new File(set.getTitle() + ".txt");
         File tempFile = new File(set.getTitle() + "New.txt");
-        String row = null;
         if (!file.isFile()) {
             System.out.println("File doesn't exist");
         }
         try {
-            bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+
+            try {
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
+                while (true) {
+                    if ((line = bufferedReader.readLine()) == null) break;
+                    if (!line.trim().equals(lineToRemove)) {
+                        bufferedWriter.write(line);
+                    }
+                }
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                bufferedReader.close();
+                if (!file.delete()) {
+                    System.out.println("Could not delete file");
+                    return;
+                }
+                if (!tempFile.renameTo(file)) {
+                    System.out.println("Could not rename file");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
-            while (true) {
-                if ((row = bufferedReader.readLine()) == null) break;
-                if (!row.trim().equals(lineToRemove)) {
-                    bufferedWriter.write(row);
-                }
-            }
-            if (!file.delete()) {
-                System.out.println("Could not delete file");
-                return;
-            }
-            if (!tempFile.renameTo(file)) {
-                System.out.println("Could not rename file");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
     }
 
@@ -96,10 +93,10 @@ public class FileHandler {
         String line;
         try {
             FileWriter fr = new FileWriter(file, true);
-            bufferedWriter = new BufferedWriter(fr);
-            bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedWriter bufferedWriter = new BufferedWriter(fr);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             for (int i = 0; i < set.getSet().size(); i++) {
-                line =  bufferedReader.readLine();
+                line = bufferedReader.readLine();
                 while (line != null) {
                     if (lineToUpdate.equals(line)) {
                         bufferedWriter.write(newLine);
@@ -109,8 +106,10 @@ public class FileHandler {
 
                 }
             }
+            bufferedWriter.flush();
             bufferedWriter.close();
             bufferedReader.close();
+            fr.flush();
             fr.close();
         } catch (Exception e) {
             e.getStackTrace();
@@ -124,8 +123,8 @@ public class FileHandler {
         String title;
         try {
             FileWriter fr = new FileWriter(file, true);
-            bufferedWriter = new BufferedWriter(fr);
-            bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedWriter bufferedWriter = new BufferedWriter(fr);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             for (int i = 0; i < sets.size(); i++) {
                 title = sets.get(i).getTitle() + ".txt";
                 while (true) {
@@ -136,6 +135,7 @@ public class FileHandler {
                     break;
                 }
             }
+            bufferedWriter.flush();
             bufferedWriter.close();
             bufferedReader.close();
             fr.close();
@@ -143,17 +143,17 @@ public class FileHandler {
             e.getStackTrace();
         }
     }
-
     public static void readSetFile(ArrayList<Set> sets) {
         File file = new File("setFile.txt");
+        ArrayList<Flashcard> set;
+        String title;
         try {
-            bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             try {
                 String nextLine = bufferedReader.readLine();
                 while (nextLine != null) {
-
-                    ArrayList<Flashcard> set = new ArrayList<>();
-                    String title = nextLine.replace(".txt", "");
+                    set = new ArrayList<>();
+                    title = nextLine.replace(".txt", "");
                     sets.add(new Set(set, title));
                     nextLine = bufferedReader.readLine();
                 }
@@ -163,23 +163,26 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
+
+
 
     public static void readFlashcards(Set set) {
         File file = new File(set.getTitle() + ".txt");
+        String[] parts;
+        String line;
+        String word;
+        String definition;
         try {
-            bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             try {
-                String nextLine = bufferedReader.readLine();
-                while (nextLine != null) {
-                    String line = nextLine;
-                    String[] parts = line.split(",");
-                    String word = parts[0];
-                    String definition = parts[1];
+                while ((line = bufferedReader.readLine()) != null) {
+                    parts = line.split(",");
+                    word = parts[0];
+                    definition = parts[1];
                     set.getSet().add(new Flashcard(word, definition));
-                    nextLine = bufferedReader.readLine();
                 }
+                bufferedReader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -187,6 +190,7 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        System.gc();
     }
 
 
