@@ -15,8 +15,6 @@ import java.util.Scanner;
  */
 public class Quiz {
     private QuizManager manager;
-    Scanner scan = new Scanner(System.in);
-
 
     public Quiz(QuizManager manager) {
         this.manager = manager;
@@ -25,11 +23,6 @@ public class Quiz {
     public QuizManager getManager() {
         return manager;
     }
-
-    public void setManager(QuizManager manager) {
-        this.manager = manager;
-    }
-
 
     public void  startQuiz() {
         Scanner scan = new Scanner(System.in);
@@ -68,7 +61,7 @@ public class Quiz {
 
     public static void practiceFlashcards(Set set) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Would you like to guess the word(1) or the defintion of the word(2)?");
+        System.out.println("Would you like to guess the word(1) or the definition of the word(2)?");
         int setting = scan.nextInt();
         int setLength = set.getSet().size();
         int correctWords = 0;
@@ -84,6 +77,7 @@ public class Quiz {
         System.out.println("Well done you went through the whole set!");
 
     }
+
     public static ArrayList<Integer> getRandomOrder(Set set ){
         ArrayList<Integer> indexList = new ArrayList<>();
         for(int i = 0; i < set.getSet().size(); i++){

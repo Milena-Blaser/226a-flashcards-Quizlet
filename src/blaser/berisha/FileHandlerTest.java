@@ -31,9 +31,10 @@ public class FileHandlerTest{
         quiz.startQuiz();
     }
 
-    @Test
+    /*@Test
     public boolean doesFileExist(){
         start();
 
-    }
+
+    }*/
 }
