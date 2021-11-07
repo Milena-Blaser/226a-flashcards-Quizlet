@@ -34,7 +34,7 @@ public class Set {
 
     public void searchByWord() {
         Scanner input = new Scanner(System.in);
-        System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
+        System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
         String search = input.nextLine();
         for (int i = 0; i < set.size(); i++) {
             if (set.get(i).getWord().toLowerCase().contains(search.toLowerCase())) {
