@@ -34,21 +34,21 @@ public class IOHandler {
         System.out.println(GRAY + "╔═══════════════════════════════════╗");
         System.out.println(GRAY + "\u001B[1m║ Available colors:                 ║\u001B[0m");
         System.out.println(GRAY + "║───────────────────────────────────║");
-        System.out.println("║" + BLUE + " Blue (1)                          " + GRAY + "║");
-        System.out.println("║ " + BLUE_BACKGROUND + BLACK + "Black on blue (2)                " + RESET + GRAY + " ║");
-        System.out.println("║" + PURPLE + " Purple (3)                        " + GRAY + "║");
-        System.out.println("║ " + PURPLE_BACKGROUND + BLACK + "Black on purple (4)              " + RESET + GRAY + " ║");
-        System.out.println("║" + CYAN + " Cyan (5)                          " + GRAY + "║");
-        System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan (6)                " + RESET + GRAY + " ║");
-        System.out.println("║ Gray (7)                          ║");
-        System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray (8)                " + RESET + GRAY + " ║");
-        System.out.println("║ " + RED + "Red (9)                           " + RESET + GRAY + "║");
-        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red (10)                " + RESET + GRAY + " ║");
-        System.out.println("║ " + YELLOW + "Yellow (11)                       " + RESET + GRAY + "║");
-        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow (12)             " + RESET + GRAY + " ║");
-        System.out.println("║ " + GREEN + "Green (13)                        " + RESET + GRAY + "║");
-        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green (14)              " + RESET + GRAY + " ║");
-        System.out.println("║ " + RESET + "White (15)                        " + GRAY + "║");
+        System.out.println("║" + BLUE + " Blue                          (1)" + GRAY + " ║");
+        System.out.println("║ " + BLUE_BACKGROUND + BLACK + "Black on blue                 (2)" + RESET + GRAY + " ║");
+        System.out.println("║" + PURPLE + " Purple                        (3)" + GRAY + " ║");
+        System.out.println("║ " + PURPLE_BACKGROUND + BLACK + "Black on purple               (4)" + RESET + GRAY + " ║");
+        System.out.println("║" + CYAN + " Cyan                          (5)" + GRAY + " ║");
+        System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan                 (6)" + RESET + GRAY + " ║");
+        System.out.println("║ Gray                          (7) ║");
+        System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray                 (8)" + RESET + GRAY + " ║");
+        System.out.println("║ " + RED + "Red                           (9)" + RESET + GRAY + " ║");
+        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red                 (10)" + RESET + GRAY + " ║");
+        System.out.println("║ " + YELLOW + "Yellow                       (11)" + RESET + GRAY + " ║");
+        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow              (12)" + RESET + GRAY + " ║");
+        System.out.println("║ " + GREEN + "Green                        (13)" + RESET + GRAY + " ║");
+        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green               (14)" + RESET + GRAY + " ║");
+        System.out.println("║ " + RESET + "White                        (15)" + GRAY + " ║");
         System.out.println(GRAY + "╚═══════════════════════════════════╝");
     }
 
