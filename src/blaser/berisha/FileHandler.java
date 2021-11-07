@@ -30,8 +30,10 @@ public class FileHandler {
         }
     }
 
-    public static void addFlashcardsToFile(Set set) {
+    public static boolean addFlashcardsToFile(Set set) {
         File file = new File(set.getTitle() + ".txt");
+        boolean doesExist = false;
+
         String word;
         try {
             FileWriter fr = new FileWriter(file, true);
@@ -53,6 +55,8 @@ public class FileHandler {
         } catch (Exception e) {
             e.getStackTrace();
         }
+        doesExist = file.exists();
+        return doesExist;
     }
 
     public static void deleteFlashcardFromFile(Set set, Flashcard card) {
@@ -92,6 +96,8 @@ public class FileHandler {
 
     public static void updateFlashcardInFile(Set set, Flashcard card, String newLine) {
         File file = new File(set.getTitle() + ".txt");
+        boolean doesExist = false;
+        doesExist = file.exists();
         String lineToUpdate = card.getWord() + "," + card.getDefinition();
         String line;
         try {
@@ -99,7 +105,7 @@ public class FileHandler {
             bufferedWriter = new BufferedWriter(fr);
             bufferedReader = new BufferedReader(new FileReader(file));
             for (int i = 0; i < set.getSet().size(); i++) {
-                line =  bufferedReader.readLine();
+                line = bufferedReader.readLine();
                 while (line != null) {
                     if (lineToUpdate.equals(line)) {
                         bufferedWriter.write(newLine);
@@ -115,12 +121,11 @@ public class FileHandler {
         } catch (Exception e) {
             e.getStackTrace();
         }
-
-
     }
 
-    public static void addToSetFile(ArrayList<Set> sets) {
+    public static boolean addToSetFile(ArrayList<Set> sets) {
         File file = new File("setFile.txt");
+        boolean doesExist = false;
         String title;
         try {
             FileWriter fr = new FileWriter(file, true);
@@ -142,6 +147,8 @@ public class FileHandler {
         } catch (Exception e) {
             e.getStackTrace();
         }
+        doesExist = file.exists();
+        return doesExist;
     }
 
     public static void readSetFile(ArrayList<Set> sets) {
@@ -151,7 +158,6 @@ public class FileHandler {
             try {
                 String nextLine = bufferedReader.readLine();
                 while (nextLine != null) {
-
                     ArrayList<Flashcard> set = new ArrayList<>();
                     String title = nextLine.replace(".txt", "");
                     sets.add(new Set(set, title));

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FileHandlerTest{
 
     @BeforeEach
-    public void start(){
+    void start(){
         ArrayList<Set> sets = new ArrayList<>();
         FileHandler.addToSetFile(sets);
         FileHandler.readSetFile(sets);
@@ -27,14 +28,18 @@ public class FileHandlerTest{
             FileHandler.readFlashcards(sets.get(i));
         }
         QuizManager qm = new QuizManager(sets);
-        Quiz quiz = new Quiz(qm);
-        quiz.startQuiz();
     }
 
-    /*@Test
-    public boolean doesFileExist(){
-        start();
+    @Test
+    void doesSetFileExist(){
+        assertTrue(FileHandler.addToSetFile(new ArrayList<Set>()));
+    }
 
+    @Test
+    void doesCardFileExist(){
+        ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
+        Set set = new Set(cards, "Test");
+        assertTrue(FileHandler.addFlashcardsToFile(set));
+    }
 
-    }*/
 }
