@@ -32,12 +32,17 @@ public class QuizManager {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter the title of the set: " + IOHandler.RESET);
         String setTitle = scan.nextLine();
-        ArrayList<Flashcard> cards = new ArrayList<>();
-        Set newSet = new Set(cards, setTitle);
-        sets.add(newSet);
-        FileHandler.createSetFile(newSet);
-        FileHandler.addToSetFile(sets);
-        System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
+        boolean isTitleOkay = IOHandler.printMessages(30, setTitle);
+        if (isTitleOkay) {
+            ArrayList<Flashcard> cards = new ArrayList<>();
+            Set newSet = new Set(cards, setTitle);
+            sets.add(newSet);
+            FileHandler.createSetFile(newSet);
+            FileHandler.addToSetFile(sets);
+            System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
+        } else if (!isTitleOkay) {
+            System.err.println("Could not add set! See error message.");
+        }
         return sets;
     }
 
@@ -92,10 +97,8 @@ public class QuizManager {
         int count = 0;
         for (int i = 0; i < sets.size(); i++) {
             if (answer == i) {
-
                 result.setSet(sets.get(i).getSet());
                 result.setTitle(sets.get(i).getTitle());
-
                 count++;
                 System.out.println(IOHandler.getColor() + "Found " + count + " set(s)." + IOHandler.RESET);
                 System.out.println(sets.get(i).getTitle());
@@ -141,5 +144,4 @@ public class QuizManager {
     public ArrayList<Set> getSets() {
         return sets;
     }
-
 }

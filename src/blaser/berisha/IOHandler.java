@@ -5,6 +5,8 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 /**
@@ -34,21 +36,21 @@ public class IOHandler {
         System.out.println(GRAY + "╔═══════════════════════════════════╗");
         System.out.println(GRAY + "\u001B[1m║ Available colors:                 ║\u001B[0m");
         System.out.println(GRAY + "║───────────────────────────────────║");
-        System.out.println("║" + BLUE + " Blue (1)                          " + GRAY + "║");
-        System.out.println("║ " + BLUE_BACKGROUND + BLACK + "Black on blue (2)                " + RESET + GRAY + " ║");
-        System.out.println("║" + PURPLE + " Purple (3)                        " + GRAY + "║");
-        System.out.println("║ " + PURPLE_BACKGROUND + BLACK + "Black on purple (4)              " + RESET + GRAY + " ║");
-        System.out.println("║" + CYAN + " Cyan (5)                          " + GRAY + "║");
-        System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan (6)                " + RESET + GRAY + " ║");
-        System.out.println("║ Gray (7)                          ║");
-        System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray (8)                " + RESET + GRAY + " ║");
-        System.out.println("║ " + RED + "Red (9)                           " + RESET + GRAY + "║");
-        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red (10)                " + RESET + GRAY + " ║");
-        System.out.println("║ " + YELLOW + "Yellow (11)                       " + RESET + GRAY + "║");
-        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow (12)             " + RESET + GRAY + " ║");
-        System.out.println("║ " + GREEN + "Green (13)                        " + RESET + GRAY + "║");
-        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green (14)              " + RESET + GRAY + " ║");
-        System.out.println("║ " + RESET + "White (15)                        " + GRAY + "║");
+        System.out.println("║" + BLUE + " Blue                          (1)" + GRAY + " ║");
+        System.out.println("║ " + BLUE_BACKGROUND + BLACK + "Black on blue                 (2)" + RESET + GRAY + " ║");
+        System.out.println("║" + PURPLE + " Purple                        (3)" + GRAY + " ║");
+        System.out.println("║ " + PURPLE_BACKGROUND + BLACK + "Black on purple               (4)" + RESET + GRAY + " ║");
+        System.out.println("║" + CYAN + " Cyan                          (5)" + GRAY + " ║");
+        System.out.println("║ " + CYAN_BACKGROUND + BLACK + "Black on cyan                 (6)" + RESET + GRAY + " ║");
+        System.out.println("║ Gray                          (7) ║");
+        System.out.println("║ " + GRAY_BACKGROUND + BLACK + "Black on gray                 (8)" + RESET + GRAY + " ║");
+        System.out.println("║ " + RED + "Red                           (9)" + RESET + GRAY + " ║");
+        System.out.println("║ " + RED_BACKGROUND + BLACK + "Black on red                 (10)" + RESET + GRAY + " ║");
+        System.out.println("║ " + YELLOW + "Yellow                       (11)" + RESET + GRAY + " ║");
+        System.out.println("║ " + YELLOW_BACKGROUND + BLACK + "Black on yellow              (12)" + RESET + GRAY + " ║");
+        System.out.println("║ " + GREEN + "Green                        (13)" + RESET + GRAY + " ║");
+        System.out.println("║ " + GREEN_BACKGROUND + BLACK + "Black on green               (14)" + RESET + GRAY + " ║");
+        System.out.println("║ " + RESET + "White                        (15)" + GRAY + " ║");
         System.out.println(GRAY + "╚═══════════════════════════════════╝");
     }
 
@@ -139,7 +141,7 @@ public class IOHandler {
         System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET)
         ;
         for (int i = 0; i < set.getSet().size(); i++) {
-            String toPad = (String.format("%-20s", set.getSet().get(i).getWord()) + "---->" + String.format("%40s", set.getSet().get(i).getDefinition()));
+            String toPad = (String.format("%-20s", set.getSet().get(i).getWord()) + " --> " + String.format("%40s", set.getSet().get(i).getDefinition()));
             String padded = String.format("%-45s", toPad);
             System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
 
@@ -147,13 +149,13 @@ public class IOHandler {
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
 
-    public static void printCard(Flashcard card, int i) {
+    public static void printCard(@NotNull Flashcard card, int i) {
         System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
         System.out.println(getColor() + "\u001B[1m║ CARDS                                                                   ║\u001B[0m" + RESET);
         System.out.println(getColor() + "║─────────────────────────────────────────────────────────────────────────║" + RESET);
         System.out.println(getColor() + "║ Nr.  Word                                                    Definition ║" + RESET);
         System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
-        String toPad = (String.format("%-20s", card.getWord()) + "---->" + String.format("%40s", card.getDefinition()));
+        String toPad = (String.format("%-20s", card.getWord()) + " --> " + String.format("%40s", card.getDefinition()));
         String padded = String.format("%-45s", toPad);
         System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
@@ -220,7 +222,7 @@ public class IOHandler {
         String filler = String.format("%57s", " ");
         String filler2 = String.format("%27s", " ");
         System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
-        System.out.println(getColor() + "\u001B[1m║" + set.getTitle() +  filler2 + "Correct: " + correct + filler2 + i + "/" + set.getSet().size() + "║\u001B[0m" + RESET);
+        System.out.println(getColor() + "\u001B[1m║" + set.getTitle() + filler2 + "Correct: " + correct + filler2 + i + "/" + set.getSet().size() + "║\u001B[0m" + RESET);
         System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
         System.out.println(getColor() + "\u001B[1m║" + padded + "║\u001B[0m" + RESET);
         System.out.println(getColor() + "║ " + "Skip(1) " + filler + "End(2)" + " ║" + RESET);
@@ -228,6 +230,26 @@ public class IOHandler {
 
     }
 
+    public static String checkInput(int length, String word) {
+        String message = null;
+        if (word.length() > length) {
+            message = "Word is too long!";
+        } else {
+            message = null;
+        }
+        return message;
+    }
+
+    public static boolean printMessages(int length, String word) {
+        boolean isOkay = false;
+        if (checkInput(length, word) != null) {
+            System.err.println("Too long! Max. length is " + length);
+        }
+        if (checkInput(length, word) == null) {
+            isOkay = true;
+        }
+        return isOkay;
+    }
 
     public static String getColor() {
         return color;

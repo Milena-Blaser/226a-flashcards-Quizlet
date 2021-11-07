@@ -20,24 +20,26 @@ public class Set {
         this.title = title;
     }
 
-    /**
-     * @return returns the ArrayList set with the added flashcard.
-     */
     public void addFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
         String word = input.nextLine();
+        boolean isWordOkay = IOHandler.printMessages(20, word);
         System.out.println(IOHandler.getColor() + "Enter the definition: " + IOHandler.RESET);
         String definition = input.nextLine();
-        Flashcard newCard = new Flashcard(word, definition);
-        set.add(newCard);
-        FileHandler.addFlashcardsToFile(wholeSet);
-        System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
+        boolean isDefinitionOkay = IOHandler.printMessages(40, definition);
+        if (isWordOkay && isDefinitionOkay) {
+            Flashcard newCard = new Flashcard(word, definition);
+            set.add(newCard);
+            FileHandler.addFlashcardsToFile(wholeSet);
+            System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
+        } else if (!isWordOkay) {
+            System.err.println("Card not added. See error message(s).");
+        } else if (!isDefinitionOkay) {
+            System.err.println("Card not added. See error message(s).");
+        }
     }
 
-    /**
-     * @return returns an Arraylist with all results.
-     */
     public void searchByWord() {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
@@ -48,10 +50,6 @@ public class Set {
             }
         }
     }
-
-    /**
-     * @return returns ArrayList without the card that has been deleted.
-     */
     public void deleteCard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
@@ -59,7 +57,6 @@ public class Set {
         int delete = input.nextInt();
         for (int i = 0; i < set.size(); i++) {
             if (delete == i) {
-
                 FileHandler.deleteFlashcardFromFile(wholeSet, set.get(i));
                 set.remove(set.get(i));
             }
@@ -84,27 +81,47 @@ public class Set {
                         Scanner scan = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String word = scan.nextLine();
+                        boolean isWordOkay = IOHandler.printMessages(20, word);
+                        if (isWordOkay) {
                         FileHandler.updateFlashcardInFile(wholeSet, card, word + "," + card.getDefinition());
                         set.get(i).setWord(word);
+                        } else if (!isWordOkay) {
+                            System.err.println("Could not update card.");
+                        }
                         break;
 
                     case 'd':
                         Scanner sc = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String def = sc.nextLine();
-                        FileHandler.updateFlashcardInFile(wholeSet, card, card.getWord() + "," + def);
-                        set.get(i).setDefinition(def);
+                        boolean isDefinitionOkay = IOHandler.printMessages(20, def);
+                        if (isDefinitionOkay){
+                            FileHandler.updateFlashcardInFile(wholeSet, card, card.getWord() + "," + def);
+                            set.get(i).setDefinition(def);
+                        } else if (!isDefinitionOkay) {
+                        System.err.println("Could not update card.");
+                        }
                         break;
 
                     case 'b':
                         Scanner scanner = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new word: " + IOHandler.RESET);
                         String newWord = scanner.nextLine();
+                        isWordOkay = IOHandler.printMessages(20, newWord);
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String newDef = scanner.nextLine();
-                        FileHandler.updateFlashcardInFile(wholeSet, card, newWord + "," + newDef);
-                        set.get(i).setWord(newWord);
-                        set.get(i).setDefinition(newDef);
+                        isDefinitionOkay = IOHandler.printMessages(20, newDef);
+                        if (isWordOkay && isDefinitionOkay) {
+                            FileHandler.updateFlashcardInFile(wholeSet, card, newWord + "," + newDef);
+                            set.get(i).setWord(newWord);
+                            set.get(i).setDefinition(newDef);
+                            System.out.println(IOHandler.getColor() + "Card updated!" + IOHandler.RESET);
+                        } else if (!isWordOkay) {
+                            System.err.println("Card not added. See error message(s).");
+                        } else if (!isDefinitionOkay) {
+                            System.err.println("Card not added. See error message(s).");
+                        }
+
                         break;
 
                     default:
