@@ -5,10 +5,6 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -19,8 +15,6 @@ import java.util.Scanner;
  */
 public class Quiz {
     private QuizManager manager;
-    Scanner scan = new Scanner(System.in);
-
 
     public Quiz(QuizManager manager) {
         this.manager = manager;
@@ -30,12 +24,7 @@ public class Quiz {
         return manager;
     }
 
-    public void setManager(QuizManager manager) {
-        this.manager = manager;
-    }
-
-
-    public void startQuiz() {
+    public void  startQuiz() {
         Scanner scan = new Scanner(System.in);
         IOHandler.printStartMenu();
         int choice = scan.nextInt();
@@ -93,6 +82,7 @@ public class Quiz {
         System.out.println("Well done you went through the whole set!");
 
     }
+
     public static ArrayList<Integer> getRandomOrder(Set set ){
         ArrayList<Integer> indexList = new ArrayList<>();
         for(int i = 0; i < set.getSet().size(); i++){
@@ -115,7 +105,6 @@ public class Quiz {
         String word;
         String guessedAnswer = "";
         scanner.nextLine();
-
 
         do {
             ArrayList<Integer> randomIndex = getRandomOrder(set);

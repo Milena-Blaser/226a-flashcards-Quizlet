@@ -73,7 +73,9 @@ public class IOHandler {
             case "12" -> setColor(YELLOW_BACKGROUND + BLACK);
             case "13" -> setColor(GREEN);
             case "14" -> setColor(GREEN_BACKGROUND + BLACK);
-            default -> setColor(RESET);
+            case "15" -> setColor(RESET);
+            //if the input is "invalid" the default color will be set to gray
+            default -> setColor(GRAY);
         }
     }
 
@@ -120,6 +122,8 @@ public class IOHandler {
         System.out.println(getColor() + "║───────────────────────────────────║" + RESET);
         for (int i = 0; i < manager.getSets().size(); i++) {
             String toPad = manager.getSets().get(i).getTitle();
+            //pads the string up to 30 characters so the box is the same width
+            // as long as the set title is not longer than 30 characters
             String padded = String.format("%-30s", toPad);
             System.out.println(getColor() + "║ " + i + ". " + padded + " ║" + RESET);
 
@@ -157,6 +161,7 @@ public class IOHandler {
         System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
         String toPad = (String.format("%-20s", card.getWord()) + " --> " + String.format("%40s", card.getDefinition()));
         String padded = String.format("%-45s", toPad);
+        //prints the padded string
         System.out.println(getColor() + "║ " + i + ".   " + padded + "  ║" + RESET);
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
@@ -169,8 +174,6 @@ public class IOHandler {
                 word = card.getWord();
             } else {
                 word = card.getDefinition();
-
-
             }
             System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
             System.out.println(getColor() + "\u001B[1m║" + set.getTitle() + "                                                                    " + set.getSet().size() + "║\u001B[0m" + RESET);

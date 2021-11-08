@@ -20,7 +20,7 @@ public class Set {
         this.title = title;
     }
 
-    public void addFlashcard() {
+    public void addFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
         String word = input.nextLine();
@@ -32,6 +32,7 @@ public class Set {
         if (isWordOkay && isDefinitionOkay) {
             Flashcard newCard = new Flashcard(word, definition);
             set.add(newCard);
+            FileHandler.addFlashcardsToFile(wholeSet);
             System.out.println(IOHandler.getColor() + "Card added!" + IOHandler.RESET);
         } else if (!isWordOkay) {
             System.err.println("Card not added. See error message(s).");
@@ -42,7 +43,7 @@ public class Set {
 
     public void searchByWord() {
         Scanner input = new Scanner(System.in);
-        System.out.println(IOHandler.getColor() + "Which word would you like to search for?" + IOHandler.RESET);
+        System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
         String search = input.nextLine();
         for (int i = 0; i < set.size(); i++) {
             if (set.get(i).getWord().toLowerCase().contains(search.toLowerCase())) {
@@ -51,7 +52,7 @@ public class Set {
         }
     }
 
-    public void deleteCard() {
+    public void deleteCard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to delete: " + IOHandler.RESET);
@@ -59,17 +60,19 @@ public class Set {
         for (int i = 0; i < set.size(); i++) {
             if (delete == i) {
                 set.remove(set.get(i));
+                FileHandler.deleteFlashcardFromFile(wholeSet, set.get(i));
             }
         }
     }
 
-    public void updateFlashcard() {
+    public void updateFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
         System.out.println(IOHandler.getColor() + "Enter the index of the word you'd like to edit: " + IOHandler.RESET);
         int edit = input.nextInt();
         for (int i = 0; i < set.size(); i++) {
             if (edit == i) {
+                Flashcard card = set.get(i);
                 System.out.println(IOHandler.getColor() + "Would you like to change the word, the definition or both? w/d/b" + IOHandler.RESET);
                 char editWord = input.next().charAt(0);
                 switch (editWord) {
@@ -79,6 +82,7 @@ public class Set {
                         String word = scan.nextLine();
                         boolean isWordOkay = IOHandler.printMessages(20, word);
                         if (isWordOkay) {
+                            FileHandler.updateFlashcardInFile(wholeSet, card, word + "," + card.getDefinition());
                             set.get(i).setWord(word);
                         } else if (!isWordOkay) {
                             System.err.println("Could not update card.");
@@ -89,6 +93,7 @@ public class Set {
                         Scanner sc = new Scanner(System.in);
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String def = sc.nextLine();
+                        FileHandler.updateFlashcardInFile(wholeSet, card, card.getWord() + "," + def);
                         set.get(i).setDefinition(def);
                         boolean isDefinitionOkay = IOHandler.printMessages(20, def);
                         if (isDefinitionOkay) {
@@ -106,8 +111,8 @@ public class Set {
                         System.out.println(IOHandler.getColor() + "Enter the new definition: " + IOHandler.RESET);
                         String newDef = scanner.nextLine();
                         isDefinitionOkay = IOHandler.printMessages(20, newDef);
-
                         if (isWordOkay && isDefinitionOkay) {
+                            FileHandler.updateFlashcardInFile(wholeSet, card, newWord + "," + newDef);
                             set.get(i).setWord(newWord);
                             set.get(i).setDefinition(newDef);
                             System.out.println(IOHandler.getColor() + "Card updated!" + IOHandler.RESET);

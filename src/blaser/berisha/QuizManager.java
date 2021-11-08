@@ -1,5 +1,6 @@
 package blaser.berisha;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,9 +20,14 @@ public class QuizManager {
         this.sets = sets;
     }
 
-    public static void startProgramm() {
-        ArrayList<Set> sets1 = new ArrayList<>();
-        QuizManager qm = new QuizManager(sets1);
+    public static void startProgramm(){
+        ArrayList<Set> sets = new ArrayList<>();
+        FileHandler.addToSetFile(sets);
+        FileHandler.readSetFile(sets);
+        for(int i = 0; i < sets.size(); i++){
+            FileHandler.readFlashcards(sets.get(i));
+        }
+        QuizManager qm = new QuizManager(sets);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
     }
@@ -35,6 +41,8 @@ public class QuizManager {
             ArrayList<Flashcard> cards = new ArrayList<>();
             Set newSet = new Set(cards, setTitle);
             sets.add(newSet);
+            FileHandler.createSetFile(newSet);
+        FileHandler.addToSetFile(sets);
             System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
         } else if (!isTitleOkay) {
             System.err.println("Could not add set! See error message.");
@@ -112,15 +120,13 @@ public class QuizManager {
                     IOHandler.printFlashcards(result);
                     break;
                 case 2:
-                    result.addFlashcard();
+                    result.addFlashcard(result);
                     break;
                 case 3:
-                    result.updateFlashcard();
+                    result.updateFlashcard(result);
                     break;
                 case 4:
-                    result.deleteCard();
-                    break;
-                case 5:
+                    result.deleteCard(result);
                     break;
                 case 6:
                     Quiz.practiceFlashcards(result);
@@ -143,4 +149,5 @@ public class QuizManager {
     public void setSets(ArrayList<Set> sets) {
         this.sets = sets;
     }
+
 }
