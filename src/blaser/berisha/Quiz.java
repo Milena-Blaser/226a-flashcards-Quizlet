@@ -5,7 +5,8 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
-import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -14,8 +15,6 @@ import java.util.Scanner;
  */
 public class Quiz {
     private QuizManager manager;
-    Scanner scan = new Scanner(System.in);
-
 
     public Quiz(QuizManager manager) {
         this.manager = manager;
@@ -25,12 +24,16 @@ public class Quiz {
         return manager;
     }
 
-    public void setManager(QuizManager manager) {
-        this.manager = manager;
-    }
-
-
-    public void startQuiz() {
+    /**
+     * THis method starts the Quiz by calling the method
+     * that prints the main menu and let's the user choose
+     * what he wants to do:
+     * show, add, delete, choose a set
+     * change the title of a set
+     * change the colour of the menu
+     *
+     */
+    public void  startQuiz() {
         Scanner scan = new Scanner(System.in);
         IOHandler.chooseColor();
         IOHandler.printStartMenu();
@@ -50,7 +53,12 @@ public class Quiz {
                     manager.changeSetTitle();
                     break;
                 case 5:
-                    manager.chooseAction();
+                    if(manager.getSets().size() != 0) {
+                        manager.chooseAction();
+                    }
+                    else{
+                        System.err.println("You have to add a set before you can choose one.");
+                    }
                     break;
                 case 6:
                     IOHandler.chooseColor();
@@ -65,23 +73,114 @@ public class Quiz {
             choice = scan.nextInt();
         }
     }
-    public static void practiceFlashcards(Set set){
+
+    /**
+     * This method is called when the flashcards are going to
+     * be practiced. It calls the printFlipcard method to show
+     * the card and checks whether the answers were correct
+     * @param set the set that the program loops through to
+     *            practice
+     */
+
+    public static void practiceFlashcards(Set set) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Would you like to guess the word(1) or the defintion of the word(2)?");
+        System.out.println("Would you like to guess the word(1) or the definition of the word(2)?");
         int setting = scan.nextInt();
         int setLength = set.getSet().size();
         int correctWords = 0;
         do {
             for (int i = 0; i < setLength; i++) {
                 if (set.getSet().get(i).getStatus() < 3) {
-                    IOHandler.printFlipcard(setting, set, set.getSet().get(i));
+                    IOHandler.printFlipcard(setting, set, set.getSet().get(i), i);
                 } else {
                     correctWords += 1;
                 }
             }
-        }while (correctWords < setLength);
+        } while (correctWords < setLength);
         System.out.println("Well done you went through the whole set!");
 
     }
 
+    public static ArrayList<Integer> getRandomOrder(Set set ){
+        ArrayList<Integer> indexList = new ArrayList<>();
+        for(int i = 0; i < set.getSet().size(); i++){
+            indexList.add(i);
+        }
+        Collections.shuffle(indexList);
+
+        return indexList;
+    }
+
+    /**
+     * This method is called when the use wants to practice
+     * the spelling of the flashcards. It loops randomly through all
+     * the flashcards of a set and checks whether the answers
+     * are correct. Is the answer not correct the user will be
+     * asked to repeat the correct answer that is printed out.
+     *
+     * @param set that is practiceed
+     */
+    public static void learnWords(Set set) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Would you like to guess the word(1) or the defintion of the word(2)?");
+        int wordSetting = scanner.nextInt();
+        System.out.println("Would you like to have the words checked on correct casing? yes(1) or no(2)");
+        int checkingSetting = scanner.nextInt();
+        int setLength = set.getSet().size();
+        int correctWords = 0;
+        String definition;
+        String word;
+        String guessedAnswer = "";
+        scanner.nextLine();
+
+        do {
+            ArrayList<Integer> randomIndex = getRandomOrder(set);
+            for (int i = 0; i < setLength; i++) {
+
+                if (set.getSet().get(randomIndex.get(i)).getStatus() < 3) {
+
+                    IOHandler.printLearningCard(wordSetting, set, set.getSet().get(randomIndex.get(i)), i);
+                    System.out.println("Your answer: ");
+
+                    guessedAnswer = scanner.nextLine();
+                    definition = set.getSet().get(randomIndex.get(i)).getDefinition().toLowerCase();
+                    word = set.getSet().get(randomIndex.get(i)).getWord().toLowerCase();
+                    if(checkingSetting == 2){
+                        guessedAnswer = guessedAnswer.toLowerCase();
+                        definition = definition.toLowerCase();
+                        word = word.toLowerCase();
+                    }
+                    if (guessedAnswer.equals(definition) || guessedAnswer.equals(word)) {
+                        set.getSet().get(randomIndex.get(i)).setStatus(set.getSet().get(randomIndex.get(i)).getStatus() + 1);
+                        System.out.println("Correct!");
+                    } else if (guessedAnswer.equals("2")) {
+                        correctWords = setLength;
+                        break;
+
+                    } else {
+                        set.getSet().get(i).setStatus(0);
+                        if (wordSetting == 2) {
+                            System.out.println("Correct Answer would have been: " + set.getSet().get(randomIndex.get(i)).getWord());
+                        } else {
+                            System.out.println("Correct Answer would have been: " + set.getSet().get(randomIndex.get(i)).getDefinition());
+                        }
+                        do {
+                            System.out.println("Repeat the word: ");
+                            guessedAnswer = scanner.nextLine();
+                        }while(!guessedAnswer.equals(definition) && wordSetting == 1 || wordSetting == 2 && !guessedAnswer.equals(word));
+                    }
+                } else {
+                    correctWords += 1;
+                }
+            }
+            System.out.println("NEXT ROUND!");
+        } while (correctWords < setLength);
+
+        for (int i = 0; i < set.getSet().size(); i++) {
+            set.getSet().get(i).setStatus(0);
+        }
+        if (!guessedAnswer.equals("2")) {
+            System.out.println("Well done you got all the cards correct!");
+        }
+    }
 }
