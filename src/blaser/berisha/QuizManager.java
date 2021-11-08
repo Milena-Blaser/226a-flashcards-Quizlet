@@ -1,6 +1,5 @@
 package blaser.berisha;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +18,7 @@ public class QuizManager {
         this.sets = sets;
     }
 
-    public static void startProgramm(){
+    public static void startProgramm() {
         ArrayList<Set> sets = new ArrayList<>();
         FileHandler.addToSetFile(sets);
         FileHandler.readSetFile(sets);

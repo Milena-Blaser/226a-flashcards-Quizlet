@@ -22,7 +22,6 @@ public class FileHandler {
     public static void createSetFile(Set set) {
         try {
             FileWriter fileWriter = new FileWriter(set.getTitle().concat(".txt"));
-            fileWriter.flush();
             fileWriter.close();
         } catch (Exception e) {
             e.getStackTrace();
@@ -75,7 +74,6 @@ public class FileHandler {
         }
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-
             try {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
                 while(bufferedReader.readLine() != null) {
@@ -255,7 +253,6 @@ public class FileHandler {
                     break;
                 }
             }
-            bufferedWriter.flush();
             bufferedWriter.close();
             bufferedReader.close();
             fr.close();
