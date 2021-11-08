@@ -7,8 +7,11 @@ import java.util.ArrayList;
  Program:
  Author:Milena
  Date:04.11.2021
- Project:
+ Project: 266a-flashcards-Quizlet
  Description:
+ This Class is responsible for saving, updating and reading the
+ flashcards into or out of the according set txt-files.
+
  **************************************************************/
 
 public class FileHandler {
@@ -238,7 +241,7 @@ public class FileHandler {
     }
     /**
      * This method adds a set to the setFile when a new set is created
-     * @param sets Arraylist of sets that are looped through so that newest set can be addded
+     * @param sets Arraylist of sets that are looped through so that newest set can be added
      */
     public static boolean addToSetFile(ArrayList<Set> sets) {
         File file = new File("setFile.txt");
