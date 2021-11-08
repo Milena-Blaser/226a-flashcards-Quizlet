@@ -1,6 +1,5 @@
 package blaser.berisha;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,13 +19,10 @@ public class QuizManager {
         this.sets = sets;
     }
 
-    public static void startProgramm(){
+    public static void startProgramm() {
         ArrayList<Set> sets = new ArrayList<>();
         FileHandler.addToSetFile(sets);
         FileHandler.readSetFile(sets);
-        for(int i = 0; i < sets.size(); i++){
-            FileHandler.readFlashcards(sets.get(i));
-        }
         QuizManager qm = new QuizManager(sets);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
@@ -42,7 +38,7 @@ public class QuizManager {
             Set newSet = new Set(cards, setTitle);
             sets.add(newSet);
             FileHandler.createSetFile(newSet);
-        FileHandler.addToSetFile(sets);
+            FileHandler.addToSetFile(sets);
             System.out.println(IOHandler.getColor() + "Set added!" + IOHandler.RESET);
         } else if (!isTitleOkay) {
             System.err.println("Could not add set! See error message.");
@@ -59,7 +55,9 @@ public class QuizManager {
             if (edit == i) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Enter the new title: ");
-                sets.get(i).setTitle(scanner.nextLine());
+                String title = scanner.nextLine();
+                FileHandler.updateSetFile(sets.get(i), title);
+                sets.get(i).setTitle(title);
                 System.out.println("Title changed!");
             }
         }
@@ -72,6 +70,7 @@ public class QuizManager {
         int delete = scan.nextInt();
         for (int i = 0; i < sets.size(); i++) {
             if (delete == i) {
+                FileHandler.deleteFromSetFile(sets.get(i));
                 sets.remove(sets.get(i));
             }
         }
@@ -113,6 +112,7 @@ public class QuizManager {
         Scanner scanner = new Scanner(System.in);
         Set result = chooseSet();
         IOHandler.printSetMenu();
+        FileHandler.readFlashcards(result);
         int choice = scanner.nextInt();
         while (choice != 5) {
             switch (choice) {
@@ -145,9 +145,4 @@ public class QuizManager {
     public ArrayList<Set> getSets() {
         return sets;
     }
-
-    public void setSets(ArrayList<Set> sets) {
-        this.sets = sets;
-    }
-
 }
