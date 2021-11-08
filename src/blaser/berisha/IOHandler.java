@@ -5,6 +5,7 @@ package blaser.berisha;
  * Project: Flashcards
  */
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
@@ -32,6 +33,9 @@ public class IOHandler {
     public static final String RESET = "\033[0m";
     public static String color = GRAY;
 
+    /**
+     * This method prints all the available colours for the menu design
+     */
     public static void printColors() {
         System.out.println(GRAY + "╔═══════════════════════════════════╗");
         System.out.println(GRAY + "\u001B[1m║ Available colors:                 ║\u001B[0m");
@@ -54,6 +58,10 @@ public class IOHandler {
         System.out.println(GRAY + "╚═══════════════════════════════════╝");
     }
 
+    /**
+     * This method let's you choose which colour the menues should have
+     * and sets the colour to the chosen colour
+     */
     public static void chooseColor() {
         printColors();
         System.out.println(getColor() + "Enter the number in braces to choose: " + RESET);
@@ -79,7 +87,9 @@ public class IOHandler {
         }
     }
 
-
+    /**
+     * This method prints the main menu
+     */
     public static void printStartMenu() {
         System.out.println(getColor() + "╔═══════════════════════════════════╗" + RESET);
         System.out.println(getColor() + "\u001B[1m║ Enter the number to..             ║\u001B[0m" + RESET);
@@ -94,6 +104,9 @@ public class IOHandler {
         System.out.println(getColor() + "╚═══════════════════════════════════╝" + RESET);
     }
 
+    /**
+     * This method prints the menu that is shown after a set is chosen
+     */
 
     public static void printSetMenu() {
         System.out.println(getColor() + "╔═══════════════════════════════════╗" + RESET);
@@ -111,10 +124,11 @@ public class IOHandler {
     }
 
     /**
-     * @param manager Prints all sets. Since an Arraylist of sets is saved in
-     *                quizmanager, that's where we get the needed data from
-     *                resp. we give the method a quizmanager, to access the
-     *                arraylist with the saved sets.
+     * Prints all sets. Since an Arraylist of sets is saved in
+     * quizmanager, that's where we get the needed data from
+     *  resp. We give the method a quizmanager, to access the
+     *  arraylist with the saved sets.
+     * @param manager the used Quizmanger
      */
     public static void printSets(QuizManager manager) {
         System.out.println(getColor() + "╔═══════════════════════════════════╗" + RESET);
@@ -132,10 +146,11 @@ public class IOHandler {
     }
 
     /**
-     * @param set Prints all Flashcards in a set. Since an Arraylist of Flashcards
-     *            is saved is Set, that's where we get the needed data from
-     *            resp. we give the method a Set, to access the
-     *            Set with the saved Flashcard.
+     * Prints all Flashcards in a set. Since an Arraylist of Flashcards
+     * is saved is Set, that's where we get the needed data from
+     * resp. we give the method a Set, to access the
+     * Set with the saved Flashcard.
+     * @param set that all the flashcards belong to
      */
     public static void printFlashcards(Set set) {
         System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
@@ -166,7 +181,20 @@ public class IOHandler {
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
     }
 
-    public static void printFlipcard(int setting, Set set, Flashcard card) {
+    /**
+     * This method prints the filpcard that is used when the
+     * flashcards are practiced. It can be flipped and shows either
+     * the word or the definition. Lets the user rate how accurately
+     * they answered the question-> 3 x correct means that card has been
+     * understood and will not be shown again
+     * @param setting for what is shown first, word or definition
+     * @param set to print the correct title of the set
+     * @param card that will be printed out
+     * @param i number of the card to show how many of the cards the
+     *          user has already gone through
+     */
+    public static void printFlipcard(int setting, Set set, Flashcard card, int i) {
+        i++;
         int answer;
         String word;
         do {
@@ -175,12 +203,17 @@ public class IOHandler {
             } else {
                 word = card.getDefinition();
             }
-            System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
-            System.out.println(getColor() + "\u001B[1m║" + set.getTitle() + "                                                                    " + set.getSet().size() + "║\u001B[0m" + RESET);
-            System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
+            String correct = "ooo";
+            String status = card.printStatus();
+            correct = correct.concat(status).substring(status.length());
+            String filler2 = String.format("%27s", " ");
             String toPad = (String.format("%45s", word) + String.format("%28s", " "));
             String padded = String.format("%45s", toPad);
             String filler = String.format("%56s", " ");
+            System.out.println(getColor() + "╔═════════════════════════════════════════════════════════════════════════╗" + RESET);
+            System.out.println(getColor() + "\u001B[1m║" + set.getTitle() + filler2 + "Correct: " + correct + filler2 + i + "/" + set.getSet().size() + "║\u001B[0m" + RESET);
+            System.out.println(getColor() + "║═════════════════════════════════════════════════════════════════════════║" + RESET);
+
             System.out.println(getColor() + "\u001B[1m║" + padded + "║\u001B[0m" + RESET);
             System.out.println(getColor() + "║ " + "Flip(1) " + filler + "Next(2)" + " ║" + RESET);
             System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
@@ -191,13 +224,13 @@ public class IOHandler {
                 } else {
                     setting = 1;
                 }
-                printFlipcard(setting, set, card);
+                printFlipcard(setting, set, card, i-1);
             } else if (answer == 2) {
                 System.out.println("Did you get the word correct(1), partially correct(2) or wrong(3)?");
-                int status = scan.nextInt();
-                if (status == 1) {
+                int answerStatus = scan.nextInt();
+                if (answerStatus == 1) {
                     card.setStatus(card.getStatus() + 1);
-                } else if (status == 2) {
+                } else if (answerStatus == 2) {
                     card.setStatus(card.getStatus() + 0.5);
                 }
 
@@ -208,6 +241,17 @@ public class IOHandler {
         while (answer != 1 && answer != 2);
     }
 
+    /**
+     * This method prints the cards that are used when
+     * learning how to write the words or defintions. Checks whether
+     * user gives the correct answer and saves how many times the
+     * word has been answered correctly -> 3 x correct means card
+     * has been understood and therefore won't be shown again
+     * @param setting whether the definition or word will be shown
+     * @param set to get the correct set title
+     * @param card that will be printed and asked
+     * @param i to see how many cards you already answered
+     */
     public static void printLearningCard(int setting, Set set, Flashcard card, int i) {
         i++;
         String word;
@@ -218,7 +262,6 @@ public class IOHandler {
         }
         String correct = "ooo";
         String status = card.printStatus();
-
         correct = correct.concat(status).substring(status.length());
         String toPad = (String.format("%45s", word) + String.format("%28s", " "));
         String padded = String.format("%45s", toPad);
@@ -232,7 +275,10 @@ public class IOHandler {
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
 
     }
-
+/*
+This method checks if the user has entered a word that is to long
+and returns the message "Words to long"
+ */
     public static String checkInput(int length, String word) {
         String message = null;
         if (word.length() > length) {
@@ -243,6 +289,12 @@ public class IOHandler {
         return message;
     }
 
+    /**
+     * This method prints the error messages out
+     * @param length the max length of the input
+     * @param word the user input
+     * @return true if word is in the length limit
+     */
     public static boolean printMessages(int length, String word) {
         boolean isOkay = false;
         if (checkInput(length, word) != null) {

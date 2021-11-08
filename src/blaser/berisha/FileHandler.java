@@ -81,11 +81,9 @@ public class FileHandler {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             try {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
-                while(bufferedReader.readLine() != null) {
+                while((line = bufferedReader.readLine()) != null) {
                     if (!line.trim().equals(lineToRemove)) {
                         bufferedWriter.write(line);
-                        bufferedWriter.newLine();
-                    }else{
                         bufferedWriter.newLine();
                     }
                 }

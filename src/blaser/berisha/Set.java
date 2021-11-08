@@ -20,6 +20,13 @@ public class Set {
         this.title = title;
     }
 
+    /**
+     * This method adds a Flashcard to the right set and calls
+     * the method responsible for adding the flashcard to the
+     * set file. The word and the definition are checked whether
+     * they have a accepted length
+     * @param wholeSet is used as a parameter for the Filehandler method
+     **/
     public void addFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter a word: " + IOHandler.RESET);
@@ -40,6 +47,9 @@ public class Set {
         }
     }
 
+    /**
+     * This method lets the user search for a specific word
+     */
     public void searchByWord() {
         Scanner input = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
@@ -51,6 +61,12 @@ public class Set {
         }
     }
 
+    /**
+     * This method deletes a flashcard from the right
+     * set. It also calls the method that will delete the
+     * flashcard from the set file
+     * @param wholeSet is used a parameter for the filehandler method
+     */
     public void deleteCard(Set wholeSet) {
         Scanner input = new Scanner(System.in);
         searchByWord();
@@ -65,7 +81,11 @@ public class Set {
     }
 
     /**
+     * This method updates the Flashcard by asking
+     * whether the user wants to change the definition, the word or
+     * both.It also calls the method to update the flashcard in the set file
      * @return returns the updated set
+     * @param wholeSet is used to hand over the updated flashcard to the filehHandler
      */
     public void updateFlashcard(Set wholeSet) {
         Scanner input = new Scanner(System.in);

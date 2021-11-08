@@ -19,15 +19,25 @@ public class QuizManager {
         this.sets = sets;
     }
 
+    /**
+     * This method starts the program and checks if
+     * there are already existing set file, those
+     * sets are then added to the Arraylist of sets
+     */
     public static void startProgramm() {
         ArrayList<Set> sets = new ArrayList<>();
-        FileHandler.addToSetFile(sets);
         FileHandler.readSetFile(sets);
         QuizManager qm = new QuizManager(sets);
         Quiz quiz = new Quiz(qm);
         quiz.startQuiz();
     }
 
+    /**
+     * This method adds a new set to the Arraylist sets
+     * and calls the method that will add the set to the
+     * setFile. It also calls the creatSetFile()
+     ** @return the updated Arraylist sets
+     */
     public ArrayList<Set> addSet() {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "Enter the title of the set: " + IOHandler.RESET);
@@ -46,6 +56,11 @@ public class QuizManager {
         return sets;
     }
 
+    /**
+     * This method changes the set title and calls
+     * the method the will updated the setFile
+     * accordingly
+     */
     public void changeSetTitle() {
         Scanner scan = new Scanner(System.in);
         searchByWord();
@@ -63,6 +78,12 @@ public class QuizManager {
         }
     }
 
+    /**
+     * This method deletes a set and also calls
+     * the method that will delete the set from
+     * the setFile
+     */
+
     public void deleteSet() {
         Scanner scan = new Scanner(System.in);
         searchByWord();
@@ -75,7 +96,10 @@ public class QuizManager {
             }
         }
     }
-
+/*
+This method lets the user search for a specific word in the set
+and checks whether or not it exists
+ */
     public void searchByWord() {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
@@ -87,6 +111,12 @@ public class QuizManager {
         }
     }
 
+    /**
+     * This method lets the user choose which
+     * sets they want to work with and if this
+     * set even exists
+     * @return the index of the chosen set
+     */
     public Set chooseSet() {
         Set res = null;
         while (res == null) {
@@ -108,6 +138,14 @@ public class QuizManager {
         return res;
     }
 
+    /**
+     * This method calls the method that prints the set menu
+     * and lets the user choose what they want to do with the
+     * chosen set:
+     * add, edit, delete a card
+     * practice word or learn writing
+     * go back to main menu
+     */
     public void chooseAction() {
         Scanner scanner = new Scanner(System.in);
         Set result = chooseSet();

@@ -21,6 +21,11 @@ public class Flashcard {
     public Flashcard(){
 
     }
+    /*
+    This method put the correct version of the three
+    dots together that is needed in the printFlipcard
+    and printLearningWords methodsS
+     */
     public String printStatus(){
         String printableStatus = "";
         int countCorrectAnswer = (int) this.getStatus();

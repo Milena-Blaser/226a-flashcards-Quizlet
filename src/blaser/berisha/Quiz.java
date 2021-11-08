@@ -24,7 +24,17 @@ public class Quiz {
         return manager;
     }
 
+    /**
+     * THis method starts the Quiz by calling the method
+     * that prints the main menu and let's the user choose
+     * what he wants to do:
+     * show, add, delete, choose a set
+     * change the title of a set
+     * change the colour of the menu
+     *
+     */
     public void  startQuiz() {
+        Scanner scan = new Scanner(System.in);
         IOHandler.chooseColor();
         IOHandler.printStartMenu();
         int choice = scan.nextInt();
@@ -64,6 +74,14 @@ public class Quiz {
         }
     }
 
+    /**
+     * This method is called when the flashcards are going to
+     * be practiced. It calls the printFlipcard method to show
+     * the card and checks whether the answers were correct
+     * @param set the set that the program loops through to
+     *            practice
+     */
+
     public static void practiceFlashcards(Set set) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Would you like to guess the word(1) or the definition of the word(2)?");
@@ -73,7 +91,7 @@ public class Quiz {
         do {
             for (int i = 0; i < setLength; i++) {
                 if (set.getSet().get(i).getStatus() < 3) {
-                    IOHandler.printFlipcard(setting, set, set.getSet().get(i));
+                    IOHandler.printFlipcard(setting, set, set.getSet().get(i), i);
                 } else {
                     correctWords += 1;
                 }
@@ -93,6 +111,15 @@ public class Quiz {
         return indexList;
     }
 
+    /**
+     * This method is called when the use wants to practice
+     * the spelling of the flashcards. It loops randomly through all
+     * the flashcards of a set and checks whether the answers
+     * are correct. Is the answer not correct the user will be
+     * asked to repeat the correct answer that is printed out.
+     *
+     * @param set that is practiceed
+     */
     public static void learnWords(Set set) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Would you like to guess the word(1) or the defintion of the word(2)?");
