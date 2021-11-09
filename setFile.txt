@@ -1,2 +1,0 @@
-ps.txt
-work.txt

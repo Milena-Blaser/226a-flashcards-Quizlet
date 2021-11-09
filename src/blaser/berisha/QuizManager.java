@@ -38,7 +38,7 @@ public class QuizManager {
      * This method adds a new set to the Arraylist sets
      * and calls the method that will add the set to the
      * setFile. It also calls the creatSetFile()
-     ** @return the updated Arraylist sets
+     * * @return the updated Arraylist sets
      */
     public ArrayList<Set> addSet() {
         Scanner scan = new Scanner(System.in);
@@ -71,11 +71,11 @@ public class QuizManager {
         for (int i = 0; i < sets.size(); i++) {
             if (edit == i) {
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Enter the new title: ");
+                System.out.println(IOHandler.getColor() + "Enter the new title: ");
                 String title = scanner.nextLine();
                 FileHandler.updateSetFile(sets.get(i), title);
                 sets.get(i).setTitle(title);
-                System.out.println("Title changed!");
+                System.out.println(IOHandler.getColor() + "Title changed!");
             }
         }
     }
@@ -98,10 +98,11 @@ public class QuizManager {
             }
         }
     }
-/*
-This method lets the user search for a specific word in the set
-and checks whether or not it exists
- */
+
+    /*
+    This method lets the user search for a specific word in the set
+    and checks whether or not it exists
+     */
     public void searchByWord() {
         Scanner scan = new Scanner(System.in);
         System.out.println(IOHandler.getColor() + "What would you like to search for?" + IOHandler.RESET);
@@ -117,6 +118,7 @@ and checks whether or not it exists
      * This method lets the user choose which
      * sets they want to work with and if this
      * set even exists
+     *
      * @return the index of the chosen set
      */
     public Set chooseSet() {
@@ -127,7 +129,7 @@ and checks whether or not it exists
             System.out.println(IOHandler.getColor() + ": " + IOHandler.RESET);
             int answer = (scan.nextInt());
             if (answer >= sets.size()) {
-                System.err.println("Set not found. Please try again.");
+                System.err.println(IOHandler.getColor() + "Set not found. Please try again.");
             } else {
                 for (int i = 0; i < sets.size(); i++) {
                     if (answer == i) {

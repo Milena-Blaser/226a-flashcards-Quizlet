@@ -11,15 +11,14 @@ import java.util.ArrayList;
  Description:
  This Class is responsible for saving, updating and reading the
  flashcards into or out of the according set txt-files.
-
  **************************************************************/
 
 public class FileHandler {
     private static String line;
 
-    public static void createTheSetFile(){
+    public static void createTheSetFile() {
         File file = new File("setFile.txt");
-        if(!file.isFile()) {
+        if (!file.isFile()) {
             try {
                 FileWriter fileWriter = new FileWriter("setFile.txt");
             } catch (IOException e) {
@@ -30,6 +29,7 @@ public class FileHandler {
 
     /**
      * This method is responsible for creating a new File when a new Set is added
+     *
      * @param set the new Set that was added
      */
 
@@ -46,6 +46,7 @@ public class FileHandler {
      * This method adds all the flashcards of a set to the matching txt-file
      * by going through the file until a empty line is located. The flashcard
      * -> word and definition are added with a , in between
+     *
      * @param set where the flashcards are added to
      */
 
@@ -81,7 +82,8 @@ public class FileHandler {
      * creating a new file and adding all the flashcards expect the to-deleted-flashcard
      * to this file. After that the old file is deleted and the new file renamed so that
      * it has the old files name
-     * @param set the set where the flashcards needs to be delete from
+     *
+     * @param set  the set where the flashcards needs to be delete from
      * @param card the card that needs to be deleted
      */
     public static void deleteFlashcardFromFile(Set set, Flashcard card) {
@@ -95,7 +97,7 @@ public class FileHandler {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             try {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
-                while((line = bufferedReader.readLine()) != null) {
+                while ((line = bufferedReader.readLine()) != null) {
                     if (!line.trim().equals(lineToRemove)) {
                         bufferedWriter.write(line);
                         bufferedWriter.newLine();
@@ -126,8 +128,9 @@ public class FileHandler {
      * the flashcard that needs to be updated is reached, it will be exchanged for the newer
      * version of the flashcard. After that the old file is deleted and the new file renamed so that
      * it has the old files name
-     * @param set that needs to be updated
-     * @param card specific card that needs to be updated
+     *
+     * @param set     that needs to be updated
+     * @param card    specific card that needs to be updated
      * @param newLine the new version of the flashcard
      */
     public static void updateFlashcardInFile(Set set, Flashcard card, String newLine) {
@@ -146,7 +149,7 @@ public class FileHandler {
                 if (lineToUpdate.equals(line)) {
                     bufferedWriter.write(newLine);
                     bufferedWriter.newLine();
-                }else {
+                } else {
                     bufferedWriter.write(line);
                     bufferedWriter.newLine();
                 }
@@ -169,6 +172,7 @@ public class FileHandler {
 
     /**
      * This method deletes a set from the setFile
+     *
      * @param set that needs to be deleted
      */
     public static void deleteFromSetFile(Set set) {
@@ -182,7 +186,7 @@ public class FileHandler {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             try {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
-                while((line = bufferedReader.readLine()) != null) {
+                while ((line = bufferedReader.readLine()) != null) {
                     if (!line.trim().equals(lineToRemove)) {
                         bufferedWriter.write(line);
                         bufferedWriter.newLine();
@@ -205,16 +209,16 @@ public class FileHandler {
         }
 
 
-
     }
 
     /**
      * This method updates the setFile if the title of a set
      * is changed
-     * @param set that has a new title
+     *
+     * @param set      that has a new title
      * @param newTitle new title that we needs to update
      */
-    public static void updateSetFile(Set set, String newTitle ) {
+    public static void updateSetFile(Set set, String newTitle) {
         File file = new File("setFile.txt");
         File tempFile = new File("SetFileNEW.txt");
         String lineToUpdate = set.getTitle() + ".txt";
@@ -228,7 +232,7 @@ public class FileHandler {
                 if (lineToUpdate.equals(line)) {
                     bufferedWriter.write(newTitle.concat(".txt"));
                     bufferedWriter.newLine();
-                }else {
+                } else {
                     bufferedWriter.write(line);
                     bufferedWriter.newLine();
                 }
@@ -247,8 +251,10 @@ public class FileHandler {
             e.getStackTrace();
         }
     }
+
     /**
      * This method adds a set to the setFile when a new set is created
+     *
      * @param sets Arraylist of sets that are looped through so that newest set can be added
      */
     public static boolean addToSetFile(ArrayList<Set> sets) {
@@ -282,6 +288,7 @@ public class FileHandler {
     /**
      * This method reads the setFile into the Arraylist sets,
      * so that pre-existing sets can be used
+     *
      * @param sets Arraylist of sets
      */
     public static void readSetFile(ArrayList<Set> sets) {
@@ -309,6 +316,7 @@ public class FileHandler {
     /**
      * This method reads a Flashcard into the set file of the matching set.
      * The line in the file is split into the word and the defintion by the ","
+     *
      * @param set the flashcard belongs to
      */
     public static void readFlashcards(Set set) {
