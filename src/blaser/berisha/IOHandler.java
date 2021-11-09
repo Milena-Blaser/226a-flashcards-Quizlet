@@ -126,8 +126,9 @@ public class IOHandler {
     /**
      * Prints all sets. Since an Arraylist of sets is saved in
      * quizmanager, that's where we get the needed data from
-     *  resp. We give the method a quizmanager, to access the
-     *  arraylist with the saved sets.
+     * resp. We give the method a quizmanager, to access the
+     * arraylist with the saved sets.
+     *
      * @param manager the used Quizmanger
      */
     public static void printSets(QuizManager manager) {
@@ -150,6 +151,7 @@ public class IOHandler {
      * is saved is Set, that's where we get the needed data from
      * resp. we give the method a Set, to access the
      * Set with the saved Flashcard.
+     *
      * @param set that all the flashcards belong to
      */
     public static void printFlashcards(Set set) {
@@ -187,13 +189,14 @@ public class IOHandler {
      * the word or the definition. Lets the user rate how accurately
      * they answered the question-> 3 x correct means that card has been
      * understood and will not be shown again
+     *
      * @param setting for what is shown first, word or definition
-     * @param set to print the correct title of the set
-     * @param card that will be printed out
-     * @param i number of the card to show how many of the cards the
-     *          user has already gone through
+     * @param set     to print the correct title of the set
+     * @param card    that will be printed out
+     * @param i       number of the card to show how many of the cards the
+     *                user has already gone through
      */
-    public static void printFlipcard(int setting, Set set, Flashcard card, int i) {
+    public static int printFlipcard(int setting, Set set, Flashcard card, int i) {
         i++;
         int answer;
         String word;
@@ -224,7 +227,7 @@ public class IOHandler {
                 } else {
                     setting = 1;
                 }
-                printFlipcard(setting, set, card, i-1);
+                printFlipcard(setting, set, card, i - 1);
             } else if (answer == 2) {
                 System.out.println("Did you get the word correct(1), partially correct(2) or wrong(3)?");
                 int answerStatus = scan.nextInt();
@@ -234,11 +237,14 @@ public class IOHandler {
                     card.setStatus(card.getStatus() + 0.5);
                 }
 
+            } else if (answer == 0) {
+
             } else {
                 System.out.println("Invalid input! Either enter 1 or 2!");
             }
         }
-        while (answer != 1 && answer != 2);
+        while (answer != 1 && answer != 2 && answer != 0);
+        return answer;
     }
 
     /**
@@ -247,10 +253,11 @@ public class IOHandler {
      * user gives the correct answer and saves how many times the
      * word has been answered correctly -> 3 x correct means card
      * has been understood and therefore won't be shown again
+     *
      * @param setting whether the definition or word will be shown
-     * @param set to get the correct set title
-     * @param card that will be printed and asked
-     * @param i to see how many cards you already answered
+     * @param set     to get the correct set title
+     * @param card    that will be printed and asked
+     * @param i       to see how many cards you already answered
      */
     public static void printLearningCard(int setting, Set set, Flashcard card, int i) {
         i++;
@@ -275,10 +282,11 @@ public class IOHandler {
         System.out.println(getColor() + "╚═════════════════════════════════════════════════════════════════════════╝" + RESET);
 
     }
-/*
-This method checks if the user has entered a word that is to long
-and returns the message "Words to long"
- */
+
+    /*
+    This method checks if the user has entered a word that is to long
+    and returns the message "Words to long"
+     */
     public static String checkInput(int length, String word) {
         String message = null;
         if (word.length() > length) {
@@ -291,8 +299,9 @@ and returns the message "Words to long"
 
     /**
      * This method prints the error messages out
+     *
      * @param length the max length of the input
-     * @param word the user input
+     * @param word   the user input
      * @return true if word is in the length limit
      */
     public static boolean printMessages(int length, String word) {

@@ -87,16 +87,24 @@ public class Quiz {
         System.out.println("Would you like to guess the word(1) or the definition of the word(2)?");
         int setting = scan.nextInt();
         int setLength = set.getSet().size();
+        int answer;
         int correctWords = 0;
         do {
             for (int i = 0; i < setLength; i++) {
                 if (set.getSet().get(i).getStatus() < 3) {
-                    IOHandler.printFlipcard(setting, set, set.getSet().get(i), i);
+                    answer = IOHandler.printFlipcard(setting, set, set.getSet().get(i), i);
+                    if(answer == 0){
+                        i = setLength;
+                        correctWords = setLength;
+                    }
                 } else {
                     correctWords += 1;
                 }
             }
         } while (correctWords < setLength);
+        for (int i = 0; i < set.getSet().size(); i++) {
+            set.getSet().get(i).setStatus(0);
+        }
         System.out.println("Well done you went through the whole set!");
 
     }

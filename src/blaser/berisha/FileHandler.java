@@ -17,6 +17,17 @@ import java.util.ArrayList;
 public class FileHandler {
     private static String line;
 
+    public static void createTheSetFile(){
+        File file = new File("setFile.txt");
+        if(!file.isFile()) {
+            try {
+                FileWriter fileWriter = new FileWriter("setFile.txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * This method is responsible for creating a new File when a new Set is added
      * @param set the new Set that was added
@@ -161,7 +172,7 @@ public class FileHandler {
      * @param set that needs to be deleted
      */
     public static void deleteFromSetFile(Set set) {
-        String lineToRemove =set.getTitle().concat(".txt");
+        String lineToRemove = set.getTitle().concat(".txt");
         File file = new File("setFile.txt");
         File tempFile = new File("setFileNew.txt");
         if (!file.isFile()) {
@@ -169,14 +180,11 @@ public class FileHandler {
         }
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-
             try {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile));
-                while(bufferedReader.readLine() != null) {
+                while((line = bufferedReader.readLine()) != null) {
                     if (!line.trim().equals(lineToRemove)) {
                         bufferedWriter.write(line);
-                        bufferedWriter.newLine();
-                    }else{
                         bufferedWriter.newLine();
                     }
                 }
@@ -196,6 +204,8 @@ public class FileHandler {
             e.printStackTrace();
         }
 
+
+
     }
 
     /**
@@ -207,7 +217,7 @@ public class FileHandler {
     public static void updateSetFile(Set set, String newTitle ) {
         File file = new File("setFile.txt");
         File tempFile = new File("SetFileNEW.txt");
-        String lineToUpdate = set.getTitle();
+        String lineToUpdate = set.getTitle() + ".txt";
         String line;
         try {
             FileWriter fr = new FileWriter(tempFile, true);
@@ -216,14 +226,12 @@ public class FileHandler {
             for (int i = 0; i < set.getSet().size(); i++) {
                 line = bufferedReader.readLine();
                 if (lineToUpdate.equals(line)) {
-                    bufferedWriter.write(newTitle);
+                    bufferedWriter.write(newTitle.concat(".txt"));
                     bufferedWriter.newLine();
                 }else {
                     bufferedWriter.write(line);
                     bufferedWriter.newLine();
                 }
-
-
             }
             bufferedWriter.close();
             bufferedReader.close();
